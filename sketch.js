@@ -16,6 +16,7 @@ var data;
 var sAlpha;
 var sX;
 var sY;
+var ndata;
 
 
 // var url = ""
