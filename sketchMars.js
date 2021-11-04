@@ -14,9 +14,15 @@ var activeS = true;
 var cButton, sButton, oButton;
 var col = '#FFFF00';
 var white = "FFFFFF";
+var img;
 
 function setup() {
     noCanvas();
+
+    img = createImg('assets/bg.png','background');
+    img.position(0,0);
+    img.size(1024,512);
+
     dataC = loadJSON(dataCURL,gotData);
     dataS = loadJSON(dataSURL,gotData);
     dataO = loadJSON(dataOURL,gotData);

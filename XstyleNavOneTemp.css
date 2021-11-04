@@ -1,0 +1,40 @@
+body {
+    background-color: black;
+}
+h2 {
+    text-align: center;
+    color: white;
+}
+
+h5 {
+    text-align: center;
+    color: white;
+}
+
+p {
+    color:white;
+    text-align: center;
+    width: 800;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+} */
+
+button {
+    background-color: transparent;
+    color:white;
+    outline: none;
+    border:none;
+}
+
+#APOD {
+    width: 400 !important;
+    height: auto !important;
+}
