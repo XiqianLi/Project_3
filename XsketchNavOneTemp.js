@@ -25,6 +25,69 @@ var dataTitle;
 var dataExp;
 var dataD;
 
+var canvasW = 1280;
+var canvasH = 786
+
+var imageGroup = {
+    navOne : { 
+        X:300,
+        Y:90
+    },
+    navTwo : { 
+        X:450,
+        Y:90
+    },
+    navThree : { 
+        X:800,
+        Y:90
+    },
+    navFour : { 
+        X:950,
+        Y:90
+    },
+    logo : {
+        X:578,
+        Y:60,
+        W:120,
+        H:76
+    },
+    global : {
+        X:390,
+        Y:200,
+        W:500,
+        H:500
+    },
+    h1 : { 
+        X:580,
+        Y:320
+    },
+    h5 : { 
+        X:410,
+        Y:380
+    },
+    headerBg : {
+        X:240,
+        Y:80,
+        W:800,
+        H:40
+    },
+    APOD : { 
+        X:420,
+        Y:180
+    },
+    dataTitle : { 
+        X:520,
+        Y:650
+    },
+    dataD : { 
+        X:220,
+        Y:690
+    },
+    dataExp : { 
+        X:200,
+        Y:490
+    },
+}
 
 
 
@@ -38,7 +101,7 @@ function setup() {
 
     img = createImg('assets/bg.png','background');
     img.position(0,0);
-    img.size(1024,700);
+    img.size(canvasW ,canvasH);
 
     starOne = createImg('assets/star.png','star');
     starTwo = createImg('assets/star.png','star');
@@ -59,15 +122,16 @@ function setup() {
     navFour = createButton('Meteor');
     navOne.mouseClicked(openLinkNavOne);
 
-    navOne.position(150, 60);
-    navTwo.position(300, 60);
-    navThree.position(650, 60);
-    navFour.position(800, 60);
+    navOne.position(imageGroup.navOne.X, imageGroup.navOne.Y);
+    navTwo.position(imageGroup.navTwo.X, imageGroup.navTwo.Y);
+    navThree.position(imageGroup.navThree.X, imageGroup.navThree.Y);
+    navFour.position(imageGroup.navFour.X, imageGroup.navFour.Y);
 
-    headerBg.position(100,50);
-    // headerBg.size(800,100);
-    logo.position(450,30);
-    logo.size(120,75);
+    headerBg.position(imageGroup.headerBg.X,imageGroup.headerBg.Y);
+    headerBg.size(imageGroup.headerBg.W,imageGroup.headerBg.H);
+
+    logo.position(imageGroup.logo.X,imageGroup.logo.Y);
+    logo.size(imageGroup.logo.W,imageGroup.logo.H);
 
     // global.position(350,150);
     // global.size(300,300);
@@ -89,19 +153,19 @@ function gotData() {
 
 
     APOD = createImg(data.url,'image of the day');
-    APOD.position(300,150);
+    APOD.position(imageGroup.APOD.X,imageGroup.APOD.Y);
     APOD.id("APOD");
 
 
 
     dataTitle = createElement('h2',data.title);
-    dataTitle.position(350,600);
+    dataTitle.position(imageGroup.dataTitle.X,imageGroup.dataTitle.Y);
 
     dataD = createP(data.date);
     dataExp = createP(data.explanation);
 
-    dataD.position(70,640);
-    dataExp.position(100,440);
+    dataD.position(imageGroup.dataD.X,imageGroup.dataD.Y);
+    dataExp.position(imageGroup.dataExp.X,imageGroup.dataExp.Y);
 
     // h2 = createElement('h2','Astronomy Picture of the Day');
     // h2.position(350,420);

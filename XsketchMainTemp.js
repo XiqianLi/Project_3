@@ -19,6 +19,51 @@ var y = 1;
 var easing = 0.2;
 var mouseStar;
 
+var canvasW = 1280;
+var canvasH = 786
+
+var angle = 0;
+
+var imageGroup = {
+    navOne : { 
+        X:300,
+        Y:90
+    },
+    navTwo : { 
+        X:450,
+        Y:90
+    },
+    navThree : { 
+        X:800,
+        Y:90
+    },
+    navFour : { 
+        X:950,
+        Y:90
+    },
+    logo : {
+        X:578,
+        Y:60,
+        W:120,
+        H:76
+    },
+    global : {
+        X:390,
+        Y:200,
+        W:500,
+        H:500
+    },
+    h1 : { 
+        X:580,
+        Y:320
+    },
+    h5 : { 
+        X:410,
+        Y:380
+    },
+
+
+}
 
 
 function preload() {
@@ -26,9 +71,13 @@ function preload() {
 
 function setup() {
     noCanvas();
+
+    // push();
+    // translate(200,200);
+
     img = createImg('assets/bg.png','background');
     img.position(0,0);
-    img.size(1024,700);
+    img.size(canvasW,canvasH);
 
     starOne = createImg('assets/star.png','star');
     starTwo = createImg('assets/star.png','star');
@@ -52,24 +101,27 @@ function setup() {
 
 
 
-    navOne.position(150, 60);
-    navTwo.position(300, 60);
-    navThree.position(650, 60);
-    navFour.position(800, 60);
+    navOne.position(imageGroup.navOne.X, imageGroup.navOne.Y);
+    navTwo.position(imageGroup.navTwo.X, imageGroup.navTwo.Y);
+    navThree.position(imageGroup.navThree.X, imageGroup.navThree.Y);
+    navFour.position(imageGroup.navFour.X, imageGroup.navFour.Y);
 
-    headerBg.position(100,50);
-    logo.position(450,30);
-    logo.size(120,75);
+    headerBg.size(800,40);
+    headerBg.position(240,80);
 
-    global.position(350,150);
-    global.size(300,300);
+    logo.position(imageGroup.logo.X,imageGroup.logo.Y);
+    logo.size(imageGroup.logo.W,imageGroup.logo.H);
+
+    global.position(imageGroup.global.X,imageGroup.global.Y);
+    global.size(imageGroup.global.W,imageGroup.global.H);
+
 
     // title
     h1 = createElement('h1','SpacEd');
-    h1.position(450,220);
+    h1.position(imageGroup.h1.X,imageGroup.h1.Y);
 
     h5 = createElement('h5','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis nisl est.');
-    h5.position(300,280);
+    h5.position(imageGroup.h5.X,imageGroup.h5.Y);
 
     blink = 0;
     pH = 60;
@@ -139,6 +191,13 @@ function draw() {
   
     mouseStar.position(x,y);
     mouseStar.size(20,20);
+
+    rotate(angle);
+    global.position(imageGroup.global.X,imageGroup.global.Y);
+    global.size(imageGroup.global.W,imageGroup.global.H);
+    angle++;
+    pop();
+
 
 }
 

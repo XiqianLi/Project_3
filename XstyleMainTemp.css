@@ -2,8 +2,9 @@ body {
     background-color: black;
 }
 h1 {
-    text-align: center;
+    text-align: center !important;
     color: white;
+    display: block  !important;
 }
 
 h5 {
