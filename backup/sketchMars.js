@@ -19,9 +19,9 @@ var img;
 function setup() {
     noCanvas();
 
-    img = createImg('assets/bg.png','background');
-    img.position(0,0);
-    img.size(1024,512);
+    // img = createImg('assets/bg.png','background');
+    // img.position(0,0);
+    // img.size(1024,512);
 
     dataC = loadJSON(dataCURL,gotData);
     dataS = loadJSON(dataSURL,gotData);

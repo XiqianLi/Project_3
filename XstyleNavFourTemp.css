@@ -1,12 +1,10 @@
 body {
     background-color: black;
-    width: 1280;
-    height: 786;
 }
-h2 {
-    text-align: center;
+h1 {
+    text-align: center !important;
     color: white;
-    width: 800;
+    display: block  !important;
 }
 
 h5 {
@@ -15,30 +13,24 @@ h5 {
 }
 
 p {
-    font-size: 14;
     color:white;
     text-align: center;
-    width: 800;
+    width: 50%;
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
 
+/* img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+} */
 
 button {
     background-color: transparent;
     color:white;
     outline: none;
     border:none;
-}
-
-
-.APOD_v {
-    width: auto !important;
-    height: 400 !important;
-}
-
-.APOD_h {
-    width: 400 !important;
-    height: auto !important;
 }

@@ -84,8 +84,8 @@ var imageGroup = {
         Y:180
     },
     dataTitle : { 
-        X:220,
-        Y:700
+        X:520,
+        Y:650
     },
     dataD : { 
         X:220,
@@ -93,23 +93,47 @@ var imageGroup = {
     },
     dataExp : { 
         X:200,
-        Y:600
+        Y:490
     },
 }
 
+// earth data
+
+var dataEarth;
+var dataEarthURL = "https://api.nasa.gov/EPIC/api/natural?api_key=LiLbT8JdAtz4aX1r9ezrCnCo2o0DBNHb47LAEhvS"
+var imageList = [];
+var imageNum;
+var today;
+var todayArr;
+var apiKey = "";
+var earthImage;
+var dateList = [];
+var dateCurrent;
+var title;
+var titleDate;
+var title2;
+
+// next button
+
+var nextB;
 
 
 function preload() {
+    bg = loadImage('assets/bg.png');
+    
 }
 
 
 
 function setup() {
-    noCanvas();
+    createCanvas(1280,768);
+    background(bg);
 
-    img = createImg('assets/bg.png','background');
-    img.position(0,0);
-    img.size(canvasW ,canvasH);
+    dataEarth = loadJSON(dataEarthURL,gotData);
+
+    // img = createImg('assets/bg.png','background');
+    // img.position(0,0);
+    // img.size(canvasW ,canvasH);
 
     starOne = createImg('assets/star.png','star');
     starTwo = createImg('assets/star.png','star');
@@ -165,43 +189,45 @@ function setup() {
     pY = random(0,400);
 
     data = loadJSON(dataURL,gotData);
+
+
+
+
 }
 
 function gotData() {
-    // dataTitle = createElement('h2',data.title);
-
-
-    APOD = createImg(data.url,'image of the day');
-
-    
-    if (APOD.width >= APOD.height) {
-        APOD.addClass("APOD_h")
-
-    } else {
-        APOD.addClass("APOD_v");
-        console.log(APOD.width)
-        console.log(APOD.height)
+    // create a list of all photos
+    imageNum = Object.values(dataEarth).length;
+    today = Object.values(dataEarth)[0].date;
+    todayArr = split(today, '-');
+    console.log(todayArr);
+    for (var i = 0; i<imageNum; i++) {
+        imageList[i] = Object.values(dataEarth)[i].image
     }
 
-    APOD.center();
+    for (var i = 0; i<imageNum; i++) {
+        dateList[i] = Object.values(dataEarth)[i].date.substring(12);
+    }
 
 
-    dataD = createP(data.date);
-
-    dataTitle = createElement('h2',`${data.title} - Astronmy Picture of the Day on ${data.date}`);
-    dataTitle.position(imageGroup.dataTitle.X,imageGroup.dataTitle.Y);
 
 
-    dataExp = createP(data.explanation);
+    // for (var i = 0; i<imageNum; i++) {
+    //     var imageURL = `https://api.nasa.gov/EPIC/archive/natural/${todayArr[0]}/${todayArr[1]}/${todayArr[2].substring(0,2)}/png/${imageList[i]}.png?api_key=LiLbT8JdAtz4aX1r9ezrCnCo2o0DBNHb47LAEhvS`;
+    //     // console.log(imageURL);
+    //     earthImage = createImg(imageURL,"image");
+    //     earthImage.size(200,200);
+    //     earthImage.position(i*200,100);
+    // }
 
-    // dataD.position(imageGroup.dataD.X,imageGroup.dataD.Y);
-    dataExp.position(imageGroup.dataExp.X,imageGroup.dataExp.Y);
 
-    // h2 = createElement('h2','Astronomy Picture of the Day');
-    // h2.position(350,420);
+    // let j = 0
+    // if (j < imageNum) {
 
-    // h5 = createElement('h5','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis nisl est.');
-    // h5.position(300,280);
+    // }
+
+    titleDate = String(Object.values(dataEarth)[0].date);
+    titleDate = titleDate.substring(0,10)
 }
 
 function draw() {
@@ -209,6 +235,32 @@ function draw() {
     button = createButton("Back");
     button.position(60,90);
     button.mousePressed(openMainLink)
+
+
+
+    for (var i = 0; i<imageNum; i++) {
+        var imageURL = `https://api.nasa.gov/EPIC/archive/natural/${todayArr[0]}/${todayArr[1]}/${todayArr[2].substring(0,2)}/png/${imageList[i]}.png?api_key=LiLbT8JdAtz4aX1r9ezrCnCo2o0DBNHb47LAEhvS`;
+        // console.log(imageURL);
+        earthImage = createImg(imageURL,"image");
+        dateCurrent = createElement('h5',dateList[i]);
+        earthImage.size(180,180);
+        if (i < 6) {
+            dateCurrent.position(i*190+150,360);
+            earthImage.position(i*190+80,200);
+
+        } else {
+            dateCurrent.position((i-6)*190+150,610);
+            earthImage.position((i-6)*190+80,450);
+        }
+    }
+    
+    // title = createElement('h1', `View of Earth from Space on ${today}`);
+    // title.position(300,680)
+
+
+
+
+
 
 
     let fr = 30;
@@ -245,7 +297,30 @@ function draw() {
     mouseStar.position(x,y);
     mouseStar.size(20,20);
 
+
+    // nextB = createButton("Next");
+    // nextB.position(600,600);
+    // nextB.size(200,100);
+
+
+    // var imageURL = `https://api.nasa.gov/EPIC/archive/natural/${todayArr[0]}/${todayArr[1]}/${todayArr[2].substring(0,2)}/png/${imageList[0]}.png?api_key=LiLbT8JdAtz4aX1r9ezrCnCo2o0DBNHb47LAEhvS`;
+    // earthImage = createImg(imageURL,"image");
+    // earthImage.size(200,200);
+    // earthImage.position(i*200,100);
+
+    // nextB.mouseClicked(changeToNext)
+
+    // use if statement to aviod undefined
+    if (titleDate) {
+        title = createElement('h1', `Photos of Earth from Space on ${titleDate}`);
+        title.position(360,680)
+    }
+
 }
+
+// function changeToNext() {
+
+// }
 
 function openMainLink() {
     window.open("./XindexMainTemp.html","_self");

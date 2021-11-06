@@ -14,10 +14,17 @@ var planet, planetRing;
 var pH, pW, pX, pY;
 var mX = 1;
 var mY = 1;
-var x = 640;
-var y = 393;
+var x = 1;
+var y = 1;
 var easing = 0.2;
 var mouseStar;
+var bg;
+var pageTitle
+
+var mouseStarX = 1;
+var mouseStarY = 1;
+
+
 
 var canvasW = 1280;
 var canvasH = 786
@@ -77,31 +84,65 @@ var imageGroup = {
     }
 }
 
+// meteorite
+var mapImg;
+
+var clat = 0;
+var clon = 0;
+
+// N is +lat, S is -lat, E is +lon, W is -lon
+var lat;
+var lon;
+
+var zoom = 1;
+
+var meteor;
+
+var data;
+
+var sAlpha;
+var sX;
+var sY;
+var ndata;
+
 
 
 function preload() {
+    mapImg = loadImage("https://api.mapbox.com/styles/v1/mapbox/dark-v9/static/0,0,1,0,0/1024x512?access_token=pk.eyJ1IjoibGl4aXFpYW4iLCJhIjoiY2t2OG1qNTNkOXczbzJvbW44eGhyazR0diJ9.GaZGveNkHOP4inFpmmkSow")
+    bg = loadImage('assets/bg.png');
 }
 
 function setup() {
-    noCanvas();
+    createCanvas(1280,768);
+
+    background(bg);
+
+    loadJSON("./data.json",gotData);
+
+    pageTitle = createElement('h1','There were 45,700 Meteorite Landings on Earth Before June 27, 2018');
+
+    // meteorite change to center
+    translate(width/2,height/2)
+    imageMode(CENTER);
+    image(mapImg,0,0);
+
 
     // push();
     // translate(200,200);
 
-    img = createImg('assets/bg.png','background');
-    img.position(0,0);
-    img.size(canvasW,canvasH);
+    // img = createImg('assets/bg.png','background');
+
 
     starOne = createImg('assets/star.png','star');
     starTwo = createImg('assets/star.png','star');
     starThree = createImg('assets/star.png','star');
 
-    planet = createImg('assets/planet.png','planet');
-    planetRing = createImg('assets/planetRing.png','planetRing');
+    // planet = createImg('assets/planet.png','planet');
+    // planetRing = createImg('assets/planetRing.png','planetRing');
 
     headerBg = createImg('assets/headerBg.png','header');
     logo = createImg('assets/logo.png','logo');
-    global = createImg('assets/global.png','global');
+    // global = createImg('assets/global.png','global');
     mouseStar = createImg('assets/mouseStar.png','mouseStar');
 
     //create buttons
@@ -135,25 +176,66 @@ function setup() {
     logo.position(imageGroup.logo.X,imageGroup.logo.Y);
     logo.size(imageGroup.logo.W,imageGroup.logo.H);
 
-    global.position(imageGroup.global.X,imageGroup.global.Y);
-    global.size(imageGroup.global.W,imageGroup.global.H);
+    // global.position(imageGroup.global.X,imageGroup.global.Y);
+    // global.size(imageGroup.global.W,imageGroup.global.H);
 
 
     // title
-    h1 = createElement('h1','SpacEd');
-    h1.position(imageGroup.h1.X,imageGroup.h1.Y);
+    // h1 = createElement('h1','SpacEd');
+    // h1.position(imageGroup.h1.X,imageGroup.h1.Y);
 
-    h5 = createElement('h5','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis nisl est.');
-    h5.position(imageGroup.h5.X,imageGroup.h5.Y);
+    // h5 = createElement('h5','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis nisl est.');
+    // h5.position(imageGroup.h5.X,imageGroup.h5.Y);
 
     blink = 0;
     pH = 60;
     pW = 60;
     pX = random(0,400);
     pY = random(0,400);
+
+
 }
 
+function meotor(x) {
+    for (var i = 0; i <50; i++) {
+        fill(255,i*0.1);
+        ellipse(x+i,x+1+i,5,5);
+    }
+    x = 0;
+}
+
+function gotData(data) {
+
+    ndata = data;
+
+}
+
+// mapbox use tiles 512*521, so change 128 to 256
+function mercX(lon) {
+    lon = radians(lon);
+    var a = (256 / PI) * pow(2,zoom);
+    var b = lon + PI;
+    return a * b;
+}
+
+function mercY(lat) {
+    lat = radians(lat);
+    var a = (256 / PI) * pow(2,zoom);
+    var b = tan (PI/4 + lat/2)
+    var c = PI - log(b);
+    return a * c;
+}
+
+
 function draw() {
+
+    button = createButton("Back");
+    button.position(60,90);
+    button.mousePressed(openMainLink)
+
+
+
+    pageTitle.position(160,680);
 
     let fr = 30;
     // blinking star
@@ -170,6 +252,9 @@ function draw() {
     // star Two
     starTwo.position(700,200);
     starTwo.size(8,8);
+
+
+    
     // if (blink % 3 == 0) {
     //     starTwo.position(698,198);
     //     starTwo.size(10,10);
@@ -205,14 +290,14 @@ function draw() {
 // think about hide outside canvas
 
     let targetX = mouseX;
-    let dx = targetX - x;
-    x += dx * easing;
+    let dx = targetX - mouseStarX;
+    mouseStarX += dx * easing;
   
     let targetY = mouseY;
-    let dy = targetY - y;
-    y += dy * easing;
+    let dy = targetY - mouseStarY;
+    mouseStarY += dy * easing;
   
-    mouseStar.position(x,y);
+    mouseStar.position(mouseStarX,mouseStarY);
     mouseStar.size(20,20);
 
     // rotate(angle);
@@ -222,6 +307,31 @@ function draw() {
     // pop();
 
 
+    //
+
+    translate(width/2,height/2);
+    var cx = mercX(clon);
+    var cy = mercY(clat);
+    // console.log("test")
+
+    for (var i = 0; i <ndata.length; i++) {
+        fill(255);
+
+        if (ndata[i].geolocation) {
+        var lat = float(ndata[i].geolocation.latitude);
+        var lon = float(ndata[i].geolocation.longitude);
+        var x = mercX(lon) - cx;
+        var y = mercY(lat) - cy;
+        // console.log(x);
+        noStroke()
+        ellipse(x,y,5,5);
+        }
+    }
+
+}
+
+function openMainLink() {
+    window.open("./XindexMainTemp.html","_self");
 }
 
 function openLinkNavOne() {

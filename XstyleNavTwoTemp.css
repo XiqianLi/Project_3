@@ -1,12 +1,15 @@
 body {
     background-color: black;
-    width: 1280;
-    height: 786;
 }
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
 h2 {
     text-align: center;
     color: white;
-    width: 800;
 }
 
 h5 {
@@ -15,7 +18,6 @@ h5 {
 }
 
 p {
-    font-size: 14;
     color:white;
     text-align: center;
     width: 800;
@@ -24,6 +26,12 @@ p {
     margin-right: auto;
 }
 
+/* img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+} */
 
 button {
     background-color: transparent;
@@ -32,13 +40,7 @@ button {
     border:none;
 }
 
-
-.APOD_v {
-    width: auto !important;
-    height: 400 !important;
-}
-
-.APOD_h {
+#APOD {
     width: 400 !important;
     height: auto !important;
 }
