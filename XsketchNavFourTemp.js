@@ -297,7 +297,7 @@ function draw() {
     let dy = targetY - mouseStarY;
     mouseStarY += dy * easing;
   
-    mouseStar.position(mouseStarX,mouseStarY);
+    mouseStar.position(mouseStarX+20,mouseStarY);
     mouseStar.size(20,20);
 
     // rotate(angle);

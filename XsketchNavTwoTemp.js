@@ -241,11 +241,6 @@ function draw() {
     // title.position(300,680)
 
 
-
-
-
-
-
     let fr = 30;
     // blinking star
     frameRate(fr);
@@ -277,7 +272,7 @@ function draw() {
     let dy = targetY - y;
     y += dy * easing;
   
-    mouseStar.position(x,y);
+    mouseStar.position(x+20,y);
     mouseStar.size(20,20);
 
 

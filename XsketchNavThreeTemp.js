@@ -123,25 +123,19 @@ function setup() {
 
     cButton = createButton("Curiosity");
     cButton.position(300,660);
-    cButton.mousePressed(changeStatusC);
+    cButton.mouseClicked(changeStatusC);
     cButton.style('background-color', col);
     cButton.addClass('buttonClass')
 
     sButton = createButton("Spirit");
     sButton.position(600,660);
-    sButton.mousePressed(changeStatusS);
+    sButton.mouseClicked(changeStatusS);
     sButton.addClass('buttonClass')
 
     oButton = createButton("Opportunity");
     oButton.position(900,660);
-    oButton.mousePressed(changeStatusO);
+    oButton.mouseClicked(changeStatusO);
     oButton.addClass('buttonClass')
-
-
-
-    // img = createImg('assets/bg.png','background');
-    // img.position(0,0);
-    // img.size(canvasW ,canvasH);
 
     starOne = createImg('assets/star.png','star');
     starTwo = createImg('assets/star.png','star');
@@ -203,9 +197,7 @@ function setup() {
 }
 
 function gotData() {
-    // createElement('h1',dataC.photo[1].img_src);
-    // createP(dataC.date);
-    // console.log(dataC.photos[0].img_src)
+
     for (var i = 0; i<6 ; i++) {
         imageCList[i] = dataC.photos[i].img_src
     }
@@ -262,7 +254,7 @@ function draw() {
     let dy = targetY - mouseStarY;
     mouseStarY += dy * easing;
   
-    mouseStar.position(mouseStarX,mouseStarY);
+    mouseStar.position(mouseStarX+20,mouseStarY);
     mouseStar.size(20,20);
 
     if (statusC) {
