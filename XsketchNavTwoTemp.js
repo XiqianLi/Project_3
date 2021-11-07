@@ -209,23 +209,6 @@ function gotData() {
         dateList[i] = Object.values(dataEarth)[i].date.substring(12);
     }
 
-
-
-
-    // for (var i = 0; i<imageNum; i++) {
-    //     var imageURL = `https://api.nasa.gov/EPIC/archive/natural/${todayArr[0]}/${todayArr[1]}/${todayArr[2].substring(0,2)}/png/${imageList[i]}.png?api_key=LiLbT8JdAtz4aX1r9ezrCnCo2o0DBNHb47LAEhvS`;
-    //     // console.log(imageURL);
-    //     earthImage = createImg(imageURL,"image");
-    //     earthImage.size(200,200);
-    //     earthImage.position(i*200,100);
-    // }
-
-
-    // let j = 0
-    // if (j < imageNum) {
-
-    // }
-
     titleDate = String(Object.values(dataEarth)[0].date);
     titleDate = titleDate.substring(0,10)
 }

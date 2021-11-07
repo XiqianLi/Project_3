@@ -84,7 +84,7 @@ var imageGroup = {
         Y:180
     },
     dataTitle : { 
-        X:220,
+        X:120,
         Y:700
     },
     dataD : { 
@@ -92,7 +92,7 @@ var imageGroup = {
         Y:690
     },
     dataExp : { 
-        X:200,
+        X:100,
         Y:600
     },
 }
@@ -168,9 +168,6 @@ function setup() {
 }
 
 function gotData() {
-    // dataTitle = createElement('h2',data.title);
-
-
     APOD = createImg(data.url,'image of the day');
 
     
@@ -184,7 +181,6 @@ function gotData() {
     }
 
     APOD.center();
-
 
     dataD = createP(data.date);
 
