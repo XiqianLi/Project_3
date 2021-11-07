@@ -51,8 +51,6 @@ function meotor(x) {
 
 function gotData(data) {
     ndata = data;
-
-
 }
 
 // mapbox use tiles 512*521, so change 128 to 256
