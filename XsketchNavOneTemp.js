@@ -89,11 +89,11 @@ var imageGroup = {
     },
     dataD : { 
         X:220,
-        Y:690
+        Y:680
     },
     dataExp : { 
         X:100,
-        Y:600
+        Y:580
     },
 }
 
@@ -105,7 +105,7 @@ function preload() {
 
 
 function setup() {
-    noCanvas();
+    createCanvas(1280,768);
 
     img = createImg('assets/bg.png','background');
     img.position(0,0);
@@ -180,9 +180,9 @@ function gotData() {
         console.log(APOD.height)
     }
 
-    APOD.center();
 
-    dataD = createP(data.date);
+
+    // dataD = createP(data.date);
 
     dataTitle = createElement('h2',`${data.title} - Astronmy Picture of the Day on ${data.date}`);
     dataTitle.position(imageGroup.dataTitle.X,imageGroup.dataTitle.Y);
@@ -198,6 +198,8 @@ function gotData() {
 
     // h5 = createElement('h5','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis nisl est.');
     // h5.position(300,280);
+
+    APOD.center();
 }
 
 function draw() {

@@ -35,10 +35,21 @@ button {
 
 .APOD_v {
     width: auto !important;
-    height: 400 !important;
+    height: 350 !important;
+
+    margin-bottom: 800 !important;
+
+    /* display: flex !important;
+    justify-content: center !important;
+    align-items: center !important; */
 }
 
 .APOD_h {
-    width: 400 !important;
+    width: 350 !important;
     height: auto !important;
+
+    margin-bottom: 800 !important;
+    /* display: flex !important;
+    justify-content: center !important;
+    align-items: center !important; */
 }

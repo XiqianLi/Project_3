@@ -66,7 +66,7 @@ var imageGroup = {
         Y:320
     },
     h5 : { 
-        X:410,
+        X:565,
         Y:380
     },
     headerBg : {
@@ -83,7 +83,7 @@ function preload() {
 }
 
 function setup() {
-    noCanvas();
+    createCanvas(1280,768);
 
     // push();
     // translate(200,200);
@@ -143,7 +143,7 @@ function setup() {
     h1 = createElement('h1','SpacEd');
     h1.position(imageGroup.h1.X,imageGroup.h1.Y);
 
-    h5 = createElement('h5','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis nisl est.');
+    h5 = createElement('h5','Explore the Unknown.');
     h5.position(imageGroup.h5.X,imageGroup.h5.Y);
 
     blink = 0;
@@ -162,20 +162,20 @@ function draw() {
     // star One
     starOne.position(100,300);
     starOne.size(10,10);
-    if (blink % 5 == 0) {
-        starOne.position(98,298);
-        starOne.size(15,15);
-    }
+    // if (blink % 5 == 0) {
+    //     starOne.position(98,298);
+    //     starOne.size(15,15);
+    // }
 
     // star Two
     starTwo.position(700,200);
     starTwo.size(8,8);
-    // if (blink % 3 == 0) {
+    // if (blink % 30 == 0) {
     //     starTwo.position(698,198);
     //     starTwo.size(10,10);
     // }
 
-    // star Two
+    // star Three
     starThree.position(900,400);
     starThree.size(12,12);
     // if (blink % 4 == 0) {
@@ -200,6 +200,10 @@ function draw() {
     // planetRing.position(100,200);
     // planetRing.size(50,50);
     // planet.position(800,400);
+
+    planetRing.position(100,200);
+    planetRing.size(50,50);
+    planet.position(1000,400);
 
 
 // think about hide outside canvas

@@ -1,5 +1,7 @@
 body {
     background-color: black;
+    width: 1280;
+    height: 786;
 }
 h1 {
     text-align: center !important;
