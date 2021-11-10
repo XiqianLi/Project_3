@@ -119,7 +119,7 @@ function setup() {
     dataC = loadJSON(dataCURL,gotData);
     dataS = loadJSON(dataSURL,gotData);
     dataO = loadJSON(dataOURL,gotData);
-    pageTitle = createElement('h1','Mars Hover Photos');
+    pageTitle = createElement('h1','Mars Rover Photos');
 
     cButton = createButton("Curiosity");
     cButton.position(300,660);

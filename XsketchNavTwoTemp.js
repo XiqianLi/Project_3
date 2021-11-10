@@ -290,7 +290,7 @@ function draw() {
 
     // use if statement to aviod undefined
     if (titleDate) {
-        title = createElement('h1', `Photos of Earth from Space on ${titleDate}`);
+        title = createElement('h1', `Photos of the Earth from Space on ${titleDate}`);
         title.position(360,680)
     }
 

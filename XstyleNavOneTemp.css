@@ -37,8 +37,6 @@ button {
     width: auto !important;
     height: 350 !important;
 
-    margin-bottom: 800 !important;
-
     /* display: flex !important;
     justify-content: center !important;
     align-items: center !important; */
@@ -48,7 +46,7 @@ button {
     width: 350 !important;
     height: auto !important;
 
-    margin-bottom: 800 !important;
+
     /* display: flex !important;
     justify-content: center !important;
     align-items: center !important; */

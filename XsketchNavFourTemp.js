@@ -119,7 +119,7 @@ function setup() {
 
     loadJSON("./data.json",gotData);
 
-    pageTitle = createElement('h1','There were 45,700 Meteorite Landings on Earth Before June 27, 2018');
+    pageTitle = createElement('h1','There were 45,700 Meteorite Landings on the Earth Before June 27, 2018');
 
     // meteorite change to center
     translate(width/2,height/2)
