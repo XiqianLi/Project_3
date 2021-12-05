@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700&display=swap');
+
 body {
     background-color: black;
     width: 1280;
@@ -6,7 +8,8 @@ body {
 h2 {
     text-align: center;
     color: white;
-    width: 1100;
+    width: 1240;
+    font-family: 'Raleway', Helvetica, sans-serif;
 }
 
 h5 {
@@ -15,13 +18,16 @@ h5 {
 }
 
 p {
-    font-size: 14;
+    font-size: 12;
     color:white;
-    text-align: center;
+    text-align: left;
     width: 1100;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    font-family: 'Raleway', Helvetica, sans-serif;
+    line-height: 1.6;
+
 }
 
 
@@ -30,6 +36,7 @@ button {
     color:white;
     outline: none;
     border:none;
+    font-family: 'Raleway', Helvetica, sans-serif;
 }
 
 
@@ -45,9 +52,12 @@ button {
 .APOD_h {
     width: 350 !important;
     height: auto !important;
-
-
     /* display: flex !important;
     justify-content: center !important;
     align-items: center !important; */
+}
+
+.APOD_h_large {
+    width: 600 !important;
+    height: auto !important;
 }

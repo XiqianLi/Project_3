@@ -25,6 +25,9 @@ var canvasH = 786
 
 var angle = 0;
 
+var pMImg, pVImg, pEImg, pMaImg, pJImg, pSImg, pUImg, pNImg;
+var popDiv;
+
 var imageGroup = {
   navOne : { 
       X:200,
@@ -78,7 +81,56 @@ var imageGroup = {
   }
 }
 
-let sX = 640;
+var popUpGroup = {
+  m : {
+    nam : 'Mercury',
+    des: "Mercury is the smallest planet in the Solar System and the closest to the Sun. Its orbit around the Sun takes 87.97 Earth days, the shortest of all the Sun's planets.",
+    img: 'assets/Planet/Mercury.png'
+  },
+  v : {
+    nam : 'Venus',
+    des: "Venus is the second planet from the Sun. It is named after the Roman goddess of love and beauty. As the brightest natural object in Earth's night sky after the Moon, Venus can cast shadows and can be visible to the naked eye in broad daylight.",
+    img: 'assets/Planet/Venus.png'
+  },
+  e : {
+    nam : 'Earth',
+    des: "Earth is the third planet from the Sun and the only astronomical object known to harbour and support life. 29.2% of Earth's surface is land consisting of continents and islands. The remaining 70.8% is covered with water, mostly by oceans, seas, gulfs, and other salt-water bodies, but also by lakes, rivers, and other freshwater.",
+    img: 'assets/Planet/Earth.png'
+  },
+  ma : {
+    nam : 'Mars',
+    des: 'Mars is the fourth planet from the Sun and the second-smallest planet in the Solar System, being larger than only Mercury. In English, Mars carries the name of the Roman god of war and is often referred to as the "Red Planet".',
+    img: 'assets/Planet/Mars.png'
+  },
+  j : {
+    nam : 'Jupiter',
+    des: 'Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a gas giant with a mass more than two and a half times that of all the other planets in the Solar System combined, but slightly less than one-thousandth the mass of the Sun.',
+    img: 'assets/Planet/Jupiter.png'
+  },
+  s : {
+    nam : 'Saturn',
+    des: 'Saturn is the sixth planet from the Sun and the second-largest in the Solar System, after Jupiter. It is a gas giant with an average radius of about nine and a half times that of Earth. It only has one-eighth the average density of Earth; however, with its larger volume, Saturn is over 95 times more massive.',
+    img: 'assets/Planet/Saturn.png'
+  },
+  u : {
+    nam : 'Uranus',
+    des: 'Uranus is the seventh planet from the Sun. Its name is a reference to the Greek god of the sky, Uranus, who, according to Greek mythology, was the great-grandfather of Ares, grandfather of Zeus and father of Cronus. It has the third-largest planetary radius and fourth-largest planetary mass in the Solar System.',
+    img: 'assets/Planet/Uranus.png'
+  },
+  n : {
+    nam : 'Neptune',
+    des: 'Neptune is the eighth and farthest-known Solar planet from the Sun. In the Solar System, it is the fourth-largest planet by diameter, the third-most-massive planet, and the densest giant planet. It is 17 times the mass of Earth, slightly more massive than its near-twin Uranus.',
+    img: 'assets/Planet/Neptune.png'
+  },
+  sun : {
+    nam : 'Sun',
+    des : 'The Sun is the star at the center of the Solar System. It is a nearly perfect ball of hot plasma, heated to incandescence by nuclear fusion reactions in its core, radiating the energy mainly as visible light, ultraviolet light, and infrared radiation. It is by far the most important source of energy for life on Earth.',
+    img : 'assets/Planet/Sun.png'
+  }
+
+}
+
+let sX = 400;
 let sY = 440;
 let d = 18;
 let radi = 3;
@@ -92,49 +144,49 @@ let m, v, e, ma, j, s, u, n;
 
 let pdata = {
   m : {
-    dis : 1,
+    dis : 4,
     radi : 1,
     spd:47,
   },
   v : {
-    dis : 1.86,
+    dis : 8,
     radi : 2.5,
     spd:35
   },
   e : {
-    dis : 2.58,
+    dis : 12,
     radi : 2.6,
     spd:30
   },
   ma : {
-    dis : 3.94,
+    dis : 16,
     radi : 1.4,
     spd:24
   },
   j : {
   //     dis : 13.44,
-    dis : 6.44,
+    dis : 20,
     // radi : 29,
     radi : 12,
     spd:13
   },
   s : {
     // dis : 25,
-    dis : 11,
+    dis : 24,
     // radi : 24,
     radi : 8,
     spd:10
   },
   u : {
     //dis : 50,
-    dis : 20,
+    dis : 28,
     // radi : 10.4,
     radi : 5,
     spd:7
   },
   n : {
   //dis : 77.6,
-    dis : 30.6,
+    dis : 32,
     // radi : 10,
     radi : 4,
     spd:5
@@ -144,11 +196,24 @@ let pdata = {
 
 
 function preload() {
+  // pMImg = loadImage('assets/Planet/Mercury.png');
+  // pVImg = loadImage('assets/Planet/Venus.png');
+  // pEImg = loadImage('assets/Planet/Earth.png');
+  // pMaImg = loadImage('assets/Planet/Mars.png');
+  // pJImg = loadImage('assets/Planet/Jupiter.png');
+  // pSImg = loadImage('assets/Planet/Saturn.png');
+  // pUImg = loadImage('assets/Planet/Uranus.png');
+  // pNImg = loadImage('assets/Planet/Neptune.png');
 }
+
+
+
 
 function setup() {
    createCanvas(1280,768);
    bg = loadImage('assets/bg.png');
+
+
 
 
     // push();
@@ -158,12 +223,12 @@ function setup() {
     // img.position(0,0);
     // img.size(canvasW,canvasH);
 
-    starOne = createImg('assets/star.png','star');
-    starTwo = createImg('assets/star.png','star');
-    starThree = createImg('assets/star.png','star');
+    // starOne = createImg('assets/star.png','star');
+    // starTwo = createImg('assets/star.png','star');
+    // starThree = createImg('assets/star.png','star');
 
-    planet = createImg('assets/planet.png','planet');
-    planetRing = createImg('assets/planetRing.png','planetRing');
+    // planet = createImg('assets/planet.png','planet');
+    // planetRing = createImg('assets/planetRing.png','planetRing');
 
     headerBg = createImg('assets/headerBg.png','header');
     logo = createImg('assets/logo.png','logo');
@@ -237,6 +302,8 @@ function setup() {
     s = random(TWO_PI);
     u = random(TWO_PI);
     n = random(TWO_PI);
+
+
 }
 
 function draw() {
@@ -246,29 +313,32 @@ function draw() {
     // blinking star
     frameRate(fr);
 
-    button = createButton("Back");
+
+
+    button = createButton("Home");
     button.position(60,90);
     button.mousePressed(openMainLink)
 
-    // star One
-    starOne.position(100,300);
-    starOne.size(10,10);
-    if (blink % 5 == 0) {
-        starOne.position(98,298);
-        starOne.size(15,15);
-    }
-
-    // star Two
-    starTwo.position(700,200);
-    starTwo.size(8,8);
-    // if (blink % 3 == 0) {
-    //     starTwo.position(698,198);
-    //     starTwo.size(10,10);
+    // // star One
+    // starOne.position(100,300);
+    // starOne.size(10,10);
+    // if (blink % 5 == 0) {
+    //     starOne.position(98,298);
+    //     starOne.size(15,15);
     // }
 
-    // star Two
-    starThree.position(900,400);
-    starThree.size(12,12);
+    // // star Two
+    // starTwo.position(700,200);
+    // starTwo.size(8,8);
+    // // if (blink % 3 == 0) {
+    // //     starTwo.position(698,198);
+    // //     starTwo.size(10,10);
+    // // }
+
+    // // star Two
+    // starThree.position(900,400);
+    // starThree.size(12,12);
+  
     // if (blink % 4 == 0) {
     //     starThree.position(898,398);
     //     starThree.size(15,15);
@@ -288,9 +358,9 @@ function draw() {
     // }
 
 
-    planetRing.position(100,200);
-    planetRing.size(50,50);
-    planet.position(1000,400);
+    // planetRing.position(100,200);
+    // planetRing.size(50,50);
+    // planet.position(1000,400);
 
 
 // think about hide outside canvas
@@ -318,11 +388,11 @@ function draw() {
 
 
     noFill(); //rings
-    strokeWeight(0.5);
+    strokeWeight(0.8);
     
     // orbit circles
     stroke("white");
-    circle(sX, sY, d);
+    circle(sX, sY, d * pdata.m.dis);
     circle(sX, sY, d * pdata.v.dis);
     circle(sX, sY, d * pdata.e.dis);
     circle(sX, sY, d * pdata.ma.dis);
@@ -341,9 +411,10 @@ function draw() {
     push();
 
     push();
+
   rotate(m);
   fill(255, 135, 51); //moons
-  circle(0, d/2, radi);
+  circle(0, (d * pdata.m.dis) / 2, radi*pdata.m.radi);
   pop();
   
   // v
@@ -407,6 +478,41 @@ pop();
  n = n + pdata.n.spd* 0.003;
  
 
+// hover (x₁-a)(x-a)+(y₁-b)(y-b)=r²
+
+// console.log((mouseX - 440) ** 2 + (mouseY - 440)**2 == (d * pdata.n.dis * 0.5) ** 2);
+
+// console.log(mouseX);
+console.log((mouseX - 440)**2 + (mouseY - 440)**2 - (d * pdata.n.dis *0.5)**2);
+
+// pMImg, pVImg, pEImg, pMaImg, pJImg, pSImg, pUImg, pNImg;
+
+if (dist(mouseX,mouseY,400,440) < 15) {
+  popUp(popUpGroup.sun);
+} else if (dist(mouseX,mouseY,400,440) < d*pdata.m.dis*0.5 +15) {
+  popUp(popUpGroup.m);
+} else if (dist(mouseX,mouseY,400,440) < d*pdata.v.dis*0.5 +15) {
+  popUp(popUpGroup.v);
+} else if (dist(mouseX,mouseY,400,440) < d*pdata.e.dis*0.5 +15) {
+  popUp(popUpGroup.e);
+} else if (dist(mouseX,mouseY,400,440) < d*pdata.ma.dis*0.5 +15) {
+  popUp(popUpGroup.ma);
+} else if (dist(mouseX,mouseY,400,440) < d*pdata.j.dis*0.5 +15) {
+  popUp(popUpGroup.j);
+} else if (dist(mouseX,mouseY,400,440) < d*pdata.s.dis*0.5 +15) {
+  popUp(popUpGroup.s);
+} else if (dist(mouseX,mouseY,400,440) < d*pdata.u.dis*0.5 +15) {
+  popUp(popUpGroup.u);
+} else if (dist(mouseX,mouseY,400,440) < d*pdata.n.dis*0.5 +15) {
+  popUp(popUpGroup.n);
+} else {
+  popUp(popUpGroup.sun)
+}
+
+
+
+
+
 
 }
 
@@ -436,4 +542,30 @@ function openLinkNavFive() {
 
 function openLinkNavSix() {
   window.open("./XindexNavSixTemp.html","_self");
+}
+
+function popUp(x) {
+  fill(0);
+  popDiv = createElement('div');
+  popDiv.position(800,200);
+
+  pNImg = createImg(x.img,'Image');
+
+  if (x == popUpGroup.s) {
+    pNImg.size(300,180);
+    pNImg.position(860,240);
+  } else {
+    pNImg.position(930,240);
+    pNImg.size(180,180);
+  }
+
+  let popDiv2 = createElement('h3',x.nam);
+  popDiv2.position(800,380);
+  
+  let popDiv3 = createElement('h4',x.des);
+  popDiv3.position(800,450);
+
+
+  image(pNImg, 500, -150,100,100);
+  
 }

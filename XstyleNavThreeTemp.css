@@ -1,21 +1,38 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700&display=swap');
+
+main {
+    font-family: 'Raleway', Courier, monospace;
+}
 body {
     background-color: black;
     width: 1280;
     height: 786;
-
+    font-family: 'Raleway', Courier, monospace;
     border: 0px; 
     margin: 0px;
     padding: 0px;
 }
 
 h1 {
-    text-align: center;
-    color: white;
+    font-family: 'Raleway', Courier, monospace;
+    text-align: center !important;
+    color:#5E8DEC;
+    display: block  !important;
+    width: 1280px;
 }
 
 h2 {
     text-align: center;
     color: white;
+}
+
+h4 {
+    text-align: left;
+    color: white;
+    width: 880px;
+    font-weight: normal;
+    line-height: 1.6;
+    padding: 20px 60px 20px 60px;
 }
 
 h5 {
@@ -40,6 +57,7 @@ p {
 } */
 
 button {
+    font-family: 'Raleway', Courier, monospace;
     background-color: transparent;
     color:white;
     outline: none;
@@ -47,9 +65,22 @@ button {
 }
 
 .buttonClass {
-    color:black
+    font-family: 'Raleway', Courier, monospace;
+    font-size: 20px;
+    background-color: #373255;
+    color:#7878AB;
+    width: 160px;
+    height: 50px;
+    border-radius: 30px;
 }
-#APOD {
-    width: 400 !important;
-    height: auto !important;
+
+div {
+    font-size: 0.8em;
+    color:white;
+    width: 450px;
+    height: 60px;
+    background-color:#5E8DEC;
+    padding: 30px !important;
+    border-radius:16px;
+    line-height: 1.6;
 }

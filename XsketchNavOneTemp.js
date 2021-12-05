@@ -1,3 +1,5 @@
+
+
 var img;
 var starOne, starTwo, starThree;
 var headerBg;
@@ -19,11 +21,14 @@ var y = 1;
 var easing = 0.2;
 var mouseStar;
 var dataURL = "https://api.nasa.gov/planetary/apod?api_key=LiLbT8JdAtz4aX1r9ezrCnCo2o0DBNHb47LAEhvS";
-var data;
+var APODdata;
 var APOD;
 var dataTitle;
 var dataExp;
 var dataD;
+var hSlider;
+var vSlider;
+var APODratio;
 
 var canvasW = 1280;
 var canvasH = 786
@@ -84,7 +89,7 @@ var imageGroup = {
         Y:180
     },
     dataTitle : { 
-        X:120,
+        X:0,
         Y:700
     },
     dataD : { 
@@ -98,8 +103,11 @@ var imageGroup = {
 }
 
 
-
 function preload() {
+    loadJSON('https://api.nasa.gov/planetary/apod?api_key=LiLbT8JdAtz4aX1r9ezrCnCo2o0DBNHb47LAEhvS',gotData);
+    function gotData(data) {
+        APODdata = data;
+    }
 }
 
 
@@ -111,20 +119,10 @@ function setup() {
     img.position(0,0);
     img.size(canvasW ,canvasH);
 
-    starOne = createImg('assets/star.png','star');
-    starTwo = createImg('assets/star.png','star');
-    starThree = createImg('assets/star.png','star');
-
-    planet = createImg('assets/planet.png','planet');
-    planetRing = createImg('assets/planetRing.png','planetRing');
-
     headerBg = createImg('assets/headerBg.png','header');
     logo = createImg('assets/logo.png','logo');
-    // global = createImg('assets/global.png','global');
     mouseStar = createImg('assets/mouseStar.png','mouseStar');
 
-    //create buttons
-   //create buttons
    navOne = createButton('APOD');
    navTwo = createButton('Earth');
    navThree = createButton('Mars');
@@ -152,10 +150,27 @@ function setup() {
     logo.position(imageGroup.logo.X,imageGroup.logo.Y);
     logo.size(imageGroup.logo.W,imageGroup.logo.H);
 
-    // global.position(350,150);
-    // global.size(300,300);
 
-    // title
+    dataTitle = createElement('h2',`${APODdata.title} - Astronmy Picture of the Day on ${APODdata.date}`);
+    dataTitle.position(imageGroup.dataTitle.X,imageGroup.dataTitle.Y);
+
+    dataExp = createP(APODdata.explanation);
+    dataExp.position(imageGroup.dataExp.X,imageGroup.dataExp.Y);
+
+
+    APOD = createImg(APODdata.url,'image of the day');
+
+    APODratio = APOD.width / APOD.height;
+  
+    if ( APODratio >=1 ) {
+        APOD.size(500, AUTO);
+        hSlider = createSlider(500, 1100);
+        hSlider.position(1000, 560);
+    } else {
+        APOD.size(AUTO, 270);
+        vSlider = createSlider(270, 800);
+        vSlider.position(1000, 560);
+    }
 
 
     blink = 0;
@@ -163,71 +178,26 @@ function setup() {
     pW = 60;
     pX = random(0,400);
     pY = random(0,400);
-
-    data = loadJSON(dataURL,gotData);
 }
 
-function gotData() {
-    APOD = createImg(data.url,'image of the day');
-
-    
-    if (APOD.width >= APOD.height) {
-        APOD.addClass("APOD_h")
-
-    } else {
-        APOD.addClass("APOD_v");
-        console.log(APOD.width)
-        console.log(APOD.height)
-    }
-
-
-
-    // dataD = createP(data.date);
-
-    dataTitle = createElement('h2',`${data.title} - Astronmy Picture of the Day on ${data.date}`);
-    dataTitle.position(imageGroup.dataTitle.X,imageGroup.dataTitle.Y);
-
-
-    dataExp = createP(data.explanation);
-
-    // dataD.position(imageGroup.dataD.X,imageGroup.dataD.Y);
-    dataExp.position(imageGroup.dataExp.X,imageGroup.dataExp.Y);
-
-    // h2 = createElement('h2','Astronomy Picture of the Day');
-    // h2.position(350,420);
-
-    // h5 = createElement('h5','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis nisl est.');
-    // h5.position(300,280);
-
-    APOD.center();
-}
 
 function draw() {
 
-    button = createButton("Back");
+    button = createButton("Home");
     button.position(60,90);
     button.mousePressed(openMainLink)
 
 
-    let fr = 30;
-    // blinking star
-    frameRate(fr);
+    if (APODratio >= 1) {
+        new_width = hSlider.value();
+        APOD.size(new_width,new_width / APODratio);
+        APOD.center();
+    } else {
+        // new_height = vSlider.value();
+        // APOD.size(new_height / APODratio,new_height);
+        // APOD.center();
+    }
 
-    // star One
-    starOne.position(100,300);
-    starOne.size(10,10);
-
-    // star Two
-    starTwo.position(700,200);
-    starTwo.size(8,8);
-
-    starThree.position(900,400);
-    starThree.size(12,12);
-
-
-    planetRing.position(100,200);
-    planetRing.size(50,50);
-    planet.position(800,400);
 
 
 // think about hide outside canvas

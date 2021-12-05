@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700&display=swap');
 body {
     background-color: black;
     width: 1280;
@@ -8,9 +9,19 @@ body {
     padding: 0px;
 }
 h1 {
+    font-family: 'Raleway', Courier, monospace;
     text-align: center !important;
-    color: white;
+    color:#5E8DEC;
     display: block  !important;
+    width: 1280px;
+}
+
+h4 {
+    font-family: 'Raleway', Courier, monospace;
+    text-align: center !important;
+    color:#5E8DEC;
+    display: block  !important;
+    width: 1280px;
 }
 
 h5 {
@@ -39,4 +50,25 @@ button {
     color:white;
     outline: none;
     border:none;
+}
+
+div {
+    background:black;
+    width: 440px;
+    height: 10%;
+    text-align: left;
+    color: white;
+    font-size: 0.8em !important;
+    font-family: 'Raleway', Courier, monospace;
+    /* font-style: italic; */
+    padding: 20px;
+    border-radius: 10px;
+    line-height: 1.6;
+}
+
+a {
+    font-family: 'Raleway', Courier, monospace;
+    color: yellow;
+    width: 440px;
+    text-align: center;
 }

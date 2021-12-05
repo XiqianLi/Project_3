@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700&display=swap');
+
 body {
     background-color: black;
     width: 1280;
@@ -8,14 +10,19 @@ body {
     padding: 0px;
 }
 h1 {
+    font-family: 'Raleway', Helvetica, sans-serif;
     text-align: center !important;
     color: white;
     display: block  !important;
+    font-size: 1.5em;
 }
 
 h5 {
+    font-family: 'Raleway', Helvetica, sans-serif;
     text-align: center;
     color: white;
+    font-size: 1em;
+    font-weight: normal;
 }
 
 p {
@@ -39,4 +46,5 @@ button {
     color:white;
     outline: none;
     border:none;
+    font-family: 'Raleway', Helvetica, sans-serif;
 }

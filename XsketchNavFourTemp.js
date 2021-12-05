@@ -24,6 +24,12 @@ var pageTitle
 var mouseStarX = 1;
 var mouseStarY = 1;
 
+var inp;
+var dateB;
+var mData;
+var massFilter;
+var yearFilter
+var r,g,b;
 
 
 var canvasW = 1280;
@@ -105,26 +111,37 @@ var sX;
 var sY;
 var ndata;
 
+var yearSlider;
+
 
 
 function preload() {
     mapImg = loadImage("https://api.mapbox.com/styles/v1/mapbox/dark-v9/static/0,0,1,0,0/1024x512?access_token=pk.eyJ1IjoibGl4aXFpYW4iLCJhIjoiY2t2OG1qNTNkOXczbzJvbW44eGhyazR0diJ9.GaZGveNkHOP4inFpmmkSow")
     bg = loadImage('assets/bg.png');
+
+    data = loadJSON("https://data.nasa.gov/resource/gh4g-9sfh.json",gotData);
+    function gotData(data) {
+        ndata = data;
+    }
+
 }
 
 function setup() {
     createCanvas(1280,768);
 
-    background(bg);
 
-    loadJSON("./data.json",gotData);
+
+    yearSlider = createSlider(1500,2000,1500);
+    yearSlider.position(120,670);
+    yearSlider.size(1040,20);
+
+
+
 
     pageTitle = createElement('h1','There were 45,700 Meteorite Landings on the Earth Before June 27, 2018');
 
     // meteorite change to center
-    translate(width/2,height/2)
-    imageMode(CENTER);
-    image(mapImg,0,0);
+
 
 
     // push();
@@ -133,9 +150,9 @@ function setup() {
     // img = createImg('assets/bg.png','background');
 
 
-    starOne = createImg('assets/star.png','star');
-    starTwo = createImg('assets/star.png','star');
-    starThree = createImg('assets/star.png','star');
+    // starOne = createImg('assets/star.png','star');
+    // starTwo = createImg('assets/star.png','star');
+    // starThree = createImg('assets/star.png','star');
 
     // planet = createImg('assets/planet.png','planet');
     // planetRing = createImg('assets/planetRing.png','planetRing');
@@ -187,27 +204,17 @@ function setup() {
     // h5 = createElement('h5','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis nisl est.');
     // h5.position(imageGroup.h5.X,imageGroup.h5.Y);
 
-    blink = 0;
-    pH = 60;
-    pW = 60;
-    pX = random(0,400);
-    pY = random(0,400);
-
-
 }
 
 function meotor(x) {
+
+    // massFilter = massSlider.value();
+
     for (var i = 0; i <50; i++) {
         fill(255,i*0.1);
         ellipse(x+i,x+1+i,5,5);
     }
     x = 0;
-}
-
-function gotData(data) {
-
-    ndata = data;
-
 }
 
 // mapbox use tiles 512*521, so change 128 to 256
@@ -229,62 +236,28 @@ function mercY(lat) {
 
 function draw() {
 
-    button = createButton("Back");
+    background(bg);
+    translate(width/2,height/2)
+    imageMode(CENTER);
+    image(mapImg,0,0);
+
+    button = createButton("Home");
     button.position(60,90);
     button.mousePressed(openMainLink)
 
 
 
-    pageTitle.position(160,680);
+    pageTitle.position(240,550);
 
-    let fr = 30;
-    // blinking star
-    frameRate(fr);
+    yearFilter = yearSlider.value();
 
-    // star One
-    starOne.position(100,300);
-    starOne.size(10,10);
-    if (blink % 5 == 0) {
-        starOne.position(98,298);
-        starOne.size(15,15);
+    for (let i=0; i<6; i++) {
+        var sliderScale = createElement('h5',1500+i*100);
+        sliderScale.position(130+i*200,680);
     }
+    // var sliderScale = createElement('h5',"Time Scale");
+    // sliderScale.position(130,620);
 
-    // star Two
-    starTwo.position(700,200);
-    starTwo.size(8,8);
-
-
-    
-    // if (blink % 3 == 0) {
-    //     starTwo.position(698,198);
-    //     starTwo.size(10,10);
-    // }
-
-    // star Two
-    starThree.position(900,400);
-    starThree.size(12,12);
-    // if (blink % 4 == 0) {
-    //     starThree.position(898,398);
-    //     starThree.size(15,15);
-    // }
-    // blink += 10;
-
-    // planetRing.position(pX,pY);
-    // if (pH > 0 && pW > 0) {
-    //     planetRing.size(pH,pW);
-    //     pH -=0.5;
-    //     pW -=0.5;
-    // } else {
-    //     pH = 60;
-    //     pW = 60;
-    //     pX = random(1000);
-    //     pY = random(1000);
-    // }
-
-
-    // planetRing.position(100,200);
-    // planetRing.size(50,50);
-    // planet.position(800,400);
 
 
 // think about hide outside canvas
@@ -300,12 +273,6 @@ function draw() {
     mouseStar.position(mouseStarX+20,mouseStarY);
     mouseStar.size(20,20);
 
-    // rotate(angle);
-    // global.position(imageGroup.global.X,imageGroup.global.Y);
-    // global.size(imageGroup.global.W,imageGroup.global.H);
-    // angle++;
-    // pop();
-
 
     //
 
@@ -320,15 +287,73 @@ function draw() {
         if (ndata[i].geolocation) {
         var lat = float(ndata[i].geolocation.latitude);
         var lon = float(ndata[i].geolocation.longitude);
+        var mass = int(ndata[i].mass) * 0.1;
         var x = mercX(lon) - cx;
         var y = mercY(lat) - cy;
-        // console.log(x);
-        noStroke()
-        ellipse(x,y,5,5);
+
+        if (ndata[i].year) {
+            var year = int(ndata[i].year.substring(0, 4));
         }
+            if ( year < yearFilter) {
+                massFilter(mass);
+                stroke(r,g,b)
+                fill(r,g,b,80);
+                ellipse(x-640,y-393,10,10);
+            }
+
     }
+        }
+
+    stroke(255,204,0)
+    fill(255,204,0);
+    circle(-100,-180,20);
+
+    stroke(253,206,3)
+    fill(253,206,3);
+    circle(-100,-230,20);
+
+    stroke(253,154,1);
+    fill(253,154,1);
+    circle(-100,-280,20);
+
+    stroke(253,97,4);
+    fill(253,97,4);
+    circle(-100,-330,20);
+
+    stroke(253,44,5);
+    fill(253,44,5);
+    circle(-100,-380,20);
+
+    stroke(240,5,5);
+    fill(240,5,5);
+    circle(-100,-430,20);
+
+    sideScale = createElement('h5','Fell in year')
+    sideScale.position(120,620)
+
+    sideScale = createElement('h5','Mass in grams')
+    sideScale.position(1160,260)
+
+    sideScale = createElement('h5','> 10000')
+    sideScale.position(1200,300)
+
+    sideScale = createElement('h5','< 10000')
+    sideScale.position(1200,350)
+
+    sideScale = createElement('h5','< 5000')
+    sideScale.position(1200,400)
+
+    sideScale = createElement('h5','< 1000')
+    sideScale.position(1200,450)
+
+    sideScale = createElement('h5','< 100')
+    sideScale.position(1200,500)
+
+    sideScale = createElement('h5','< 10')
+    sideScale.position(1200,550)
 
 }
+
 
 function openMainLink() {
     window.open("./XindexMainTemp.html","_self");
@@ -356,4 +381,36 @@ function openLinkNavFive() {
 
 function openLinkNavSix() {
     window.open("./XindexNavSixTemp.html","_self");
+}
+
+function dateSubmit() {
+    targetD = inp.value();
+  }
+
+function massFilter(x) {
+    if (x < 10) {
+        r = 255;
+        g = 204;
+        b = 0;
+    } else if (x<100) {
+        r = 255;
+        g = 206;
+        b = 3;
+    }  else if (x<1000) {
+        r = 253;
+        g = 154;
+        b = 1;
+    }   else if (x<5000) {
+        r = 253;
+        g = 97;
+        b = 4;
+    } else if (x<10000) {
+        r = 253;
+        g = 44;
+        b = 5;
+    } else {
+        r = 240;
+        g = 5;
+        b = 5;
+    }
 }

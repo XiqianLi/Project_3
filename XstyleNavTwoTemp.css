@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700&display=swap');
+
 body {
     background-color: black;
     width: 1280;
@@ -11,7 +13,9 @@ body {
 
 h1 {
     text-align: center;
-    color: white;
+    color:#5E8DEC;
+    font-family: 'Raleway', Helvetica, sans-serif;
+    width:1240px;
 }
 
 h2 {
@@ -22,6 +26,9 @@ h2 {
 h5 {
     text-align: center;
     color: white;
+    font-family: 'Raleway', Helvetica, sans-serif;
+    font-size: 1em;
+    font-weight: normal;
 }
 
 p {
@@ -45,6 +52,7 @@ button {
     color:white;
     outline: none;
     border:none;
+    font-family: 'Raleway', Helvetica, sans-serif;
 }
 
 #APOD {

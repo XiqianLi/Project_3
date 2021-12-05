@@ -135,12 +135,6 @@ function setup() {
     // img.position(0,0);
     // img.size(canvasW ,canvasH);
 
-    starOne = createImg('assets/star.png','star');
-    starTwo = createImg('assets/star.png','star');
-    starThree = createImg('assets/star.png','star');
-
-    planet = createImg('assets/planet.png','planet');
-    planetRing = createImg('assets/planetRing.png','planetRing');
 
     headerBg = createImg('assets/headerBg.png','header');
     logo = createImg('assets/logo.png','logo');
@@ -190,7 +184,8 @@ function setup() {
 
     data = loadJSON(dataURL,gotData);
 
-
+    fill(0);
+    rect(60,160,1140,550,20);
 
 
 }
@@ -215,7 +210,7 @@ function gotData() {
 
 function draw() {
 
-    button = createButton("Back");
+    button = createButton("Home");
     button.position(60,90);
     button.mousePressed(openMainLink)
 
@@ -228,12 +223,12 @@ function draw() {
         dateCurrent = createElement('h5',dateList[i]);
         earthImage.size(180,180);
         if (i < 6) {
-            dateCurrent.position(i*190+150,360);
-            earthImage.position(i*190+80,200);
+            dateCurrent.position(i*190+140,370);
+            earthImage.position(i*190+70,220);
 
         } else {
-            dateCurrent.position((i-6)*190+150,610);
-            earthImage.position((i-6)*190+80,450);
+            dateCurrent.position((i-6)*190+140,590);
+            earthImage.position((i-6)*190+80,440);
         }
     }
     
@@ -241,25 +236,6 @@ function draw() {
     // title.position(300,680)
 
 
-    let fr = 30;
-    // blinking star
-    frameRate(fr);
-
-    // star One
-    starOne.position(100,300);
-    starOne.size(10,10);
-
-    // star Two
-    starTwo.position(700,200);
-    starTwo.size(8,8);
-
-    starThree.position(900,400);
-    starThree.size(12,12);
-
-
-    planetRing.position(100,200);
-    planetRing.size(50,50);
-    planet.position(800,400);
 
 
 // think about hide outside canvas
@@ -291,7 +267,7 @@ function draw() {
     // use if statement to aviod undefined
     if (titleDate) {
         title = createElement('h1', `Photos of the Earth from Space on ${titleDate}`);
-        title.position(360,680)
+        title.position(0,150)
     }
 
 }

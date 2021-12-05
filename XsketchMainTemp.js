@@ -18,11 +18,38 @@ var x = 640;
 var y = 393;
 var easing = 0.2;
 var mouseStar;
+var ape;
+var funFactEle;
+var closeB;
 
 var canvasW = 1280;
 var canvasH = 786
 
 var angle = 0;
+
+var funFactActive = false;
+
+var rand = 1;
+
+
+// var funFact = {
+//     funFact1: "Space is completely silent. There is no atmosphere in space, which means that sound has no medium or way to travel to be heard.",
+//     funFact2: "Venus is the hottest planet in the solar system and has an average surface temperature of around 450° C. Did you know that Venus isn't the closest planet to the sun?  That is Mercury.",
+//     funFact3: "While the entire NASA space suit costs a cool $12m, 70% of that cost is for the backpack and control module. However, the space suits that NASA uses were built in 1974."
+// }
+
+var funFact = [
+    "Space is completely silent. There is no atmosphere in space, which means that sound has no medium or way to travel to be heard.",
+    "Venus is the hottest planet in the solar system and has an average surface temperature of around 450° C. Did you know that Venus isn't the closest planet to the sun?  That is Mercury.",
+    "While the entire NASA space suit costs a cool $12m, 70% of that cost is for the backpack and control module. However, the space suits that NASA uses were built in 1974.",
+    "The Sun accounts for 99.86% of the mass in our solar system with a mass of around 330,000 times that of Earth. Did you know that the Sun is made up of mostly hydrogen (three quarters worth) with the rest of its mass attributed to helium.  If the Sun had a voice would it be high and squeaky from all that helium?",
+    "The Sun is large enough that approximately 1.3 million Earths could fit inside (if squashed in) or if the Earths retained their spherical shape then 960,000 would fit. But can you visualise that number of Earths? ",
+    "Just as colors are made more dramatic in sunsets on Earth, sunsets on Mars, according to NASA,  would appear bluish to human observers watching from the red planet. Fine dust makes the blue near the Sun's part of the sky much more visibilke, while normal daylight makes the Red Planet's familiar rusty dust color the most perceptible to the human eye.",
+    'There’s a planet made of diamonds twice the size of earth The "super earth," aka 55 Cancri e, is most likely covered in graphite and diamond.  Paying a visit to that planet would probably pay for the $12 million dollar space suit needed to get there!',
+    "There are more stars in the universe than grains of sand on all the beaches on Earth. That’s at least a billion trillion!",
+    "Space junk is any human-made object orbiting Earth that no longer serves a useful purpose. Scientists estimate there are about 500,000 pieces of space junk today, including fragments from rockets and satellites, and everyday items like spanners dropped during construction of the International Space Station!",
+    "Comets are leftovers from the creation of our solar system about 4.5 billion years ago – they consist of sand, ice and carbon dioxide."
+]
 
 var imageGroup = {
     navOne : { 
@@ -62,11 +89,11 @@ var imageGroup = {
         H:500
     },
     h1 : { 
-        X:580,
-        Y:320
+        X:0,
+        Y:300
     },
     h5 : { 
-        X:565,
+        X:265,
         Y:380
     },
     headerBg : {
@@ -92,12 +119,10 @@ function setup() {
     img.position(0,0);
     img.size(canvasW,canvasH);
 
-    starOne = createImg('assets/star.png','star');
-    starTwo = createImg('assets/star.png','star');
-    starThree = createImg('assets/star.png','star');
-
-    planet = createImg('assets/planet.png','planet');
-    planetRing = createImg('assets/planetRing.png','planetRing');
+    ape = createImg('assets/ape.png','ape');
+    ape.position(1000,590);
+    ape.size(150,150);
+    ape.mouseClicked(showFunFact);
 
     headerBg = createImg('assets/headerBg.png','header');
     logo = createImg('assets/logo.png','logo');
@@ -140,10 +165,10 @@ function setup() {
 
 
     // title
-    h1 = createElement('h1','SpacEd');
+    h1 = createElement('h1','SpacED');
     h1.position(imageGroup.h1.X,imageGroup.h1.Y);
 
-    h5 = createElement('h5','Explore the Unknown.');
+    h5 = createElement('h4','Welcome to SpacEd, an immersive site focused on educating its users on  all things space. Built to bring comfort and knowledge around space exploration, SpacEd is a great place to become familiar with space with data visualizations, photos, fun facts, an interactive solar system and much more.');
     h5.position(imageGroup.h5.X,imageGroup.h5.Y);
 
     blink = 0;
@@ -151,59 +176,33 @@ function setup() {
     pW = 60;
     pX = random(0,400);
     pY = random(0,400);
+
+
+    funFactEle = createDiv(funFact[rand]);
+    closeB = createButton('CLOSE');
+
+    
+
+    closeB.mouseClicked(closeFunFact);
+
 }
 
 function draw() {
-
-    let fr = 30;
-    // blinking star
-    frameRate(fr);
-
-    // star One
-    starOne.position(100,300);
-    starOne.size(10,10);
-    // if (blink % 5 == 0) {
-    //     starOne.position(98,298);
-    //     starOne.size(15,15);
-    // }
-
-    // star Two
-    starTwo.position(700,200);
-    starTwo.size(8,8);
-    // if (blink % 30 == 0) {
-    //     starTwo.position(698,198);
-    //     starTwo.size(10,10);
-    // }
-
-    // star Three
-    starThree.position(900,400);
-    starThree.size(12,12);
-    // if (blink % 4 == 0) {
-    //     starThree.position(898,398);
-    //     starThree.size(15,15);
-    // }
-    // blink += 10;
-
-    // planetRing.position(pX,pY);
-    // if (pH > 0 && pW > 0) {
-    //     planetRing.size(pH,pW);
-    //     pH -=0.5;
-    //     pW -=0.5;
-    // } else {
-    //     pH = 60;
-    //     pW = 60;
-    //     pX = random(1000);
-    //     pY = random(1000);
-    // }
+    if (funFactActive) {
+        funFactEle.html(funFact[rand])
+        funFactEle.show();
+        closeB.show();
+        funFactEle.position(410,600);
+        closeB.position(420,610);
+    } 
+    else {
+        funFactEle.hide();
+        closeB.hide();
+    }
 
 
-    // planetRing.position(100,200);
-    // planetRing.size(50,50);
-    // planet.position(800,400);
 
-    planetRing.position(100,200);
-    planetRing.size(50,50);
-    planet.position(1000,400);
+    // console.log(funFactActive);
 
 
 // think about hide outside canvas
@@ -224,6 +223,13 @@ function draw() {
     // global.size(imageGroup.global.W,imageGroup.global.H);
     // angle++;
     // pop();
+
+        // funFactEle = createDiv(random(funFact));
+        // funFactEle.position(600,620);
+        // closeB = createButton('CLOSE')
+        // closeB.position(600,620);
+    
+
 
 
 }
@@ -250,4 +256,14 @@ function openLinkNavFive() {
 
 function openLinkNavSix() {
     window.open("./XindexNavSixTemp.html","_self");
+}
+
+function showFunFact() {
+    funFactActive = true;
+    rand = floor(random(10));
+    // console.log(floor(rand))
+}
+
+function closeFunFact() {
+    funFactActive = false;
 }

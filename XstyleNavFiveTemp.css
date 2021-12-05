@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700&display=swap');
+
 body {
     background-color: black;
     width: 1280;
@@ -13,9 +15,33 @@ h1 {
     display: block  !important;
 }
 
+h3 {
+    font-size: 32px;
+    text-align: center;
+    color: white;
+    width: 18%;
+    height: 40%;
+    padding: 20px;
+    line-height: 1.6;
+    font-family: 'Raleway', Courier, monospace;
+}
+
+
+h4 {
+    text-align: left;
+    color: white;
+    width: 18%;
+    height: 40%;
+    padding: 20px;
+    line-height: 1.6;
+    font-family: 'Raleway', Courier, monospace;
+    font-weight: normal;
+}
+
 h5 {
     text-align: center;
     color: white;
+    font-weight: normal;
 }
 
 p {
@@ -39,4 +65,18 @@ button {
     color:white;
     outline: none;
     border:none;
+    font-family: 'Raleway', Helvetica, sans-serif;
+}
+
+
+div {
+    background:black;
+    width: 18%;
+    height: 40%;
+    text-align: center;
+    color: white;
+    font-size: 2em !important;
+    font-family: 'Raleway', Courier, monospace;
+    padding: 20px;
+    border-radius: 10px;
 }

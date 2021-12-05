@@ -78,92 +78,19 @@ var imageGroup = {
   }
 }
 
-let sX = 640;
-let sY = 440;
-let d = 18;
-let radi = 3;
-// let m = 0;
-// let b = 0;
-// let c = 0;
-let mSpeed;
-let bSpeed;
-let cSpeed;
-let m, v, e, ma, j, s, u, n;
-
-let pdata = {
-  m : {
-    dis : 1,
-    radi : 1,
-    spd:47,
-  },
-  v : {
-    dis : 1.86,
-    radi : 2.5,
-    spd:35
-  },
-  e : {
-    dis : 2.58,
-    radi : 2.6,
-    spd:30
-  },
-  ma : {
-    dis : 3.94,
-    radi : 1.4,
-    spd:24
-  },
-  j : {
-  //     dis : 13.44,
-    dis : 6.44,
-    // radi : 29,
-    radi : 12,
-    spd:13
-  },
-  s : {
-    // dis : 25,
-    dis : 11,
-    // radi : 24,
-    radi : 8,
-    spd:10
-  },
-  u : {
-    //dis : 50,
-    dis : 20,
-    // radi : 10.4,
-    radi : 5,
-    spd:7
-  },
-  n : {
-  //dis : 77.6,
-    dis : 30.6,
-    // radi : 10,
-    radi : 4,
-    spd:5
-  },
-}
+var interstellarImg, martianImg, Raleway, title, subTitle, takeawayInt, takeawayMar,linkInt,linkMar;
 
 
 
 function preload() {
+  interstellarImg = loadImage('assets/Interstellar2.jpeg');
+  martianImg = loadImage('assets/Martian2.jpeg');
+  Raleway = loadFont('assets/Raleway-VariableFont_wght.ttf');
 }
 
 function setup() {
    createCanvas(1280,768);
    bg = loadImage('assets/bg.png');
-
-
-    // push();
-    // translate(200,200);
-
-    // img = createImg('assets/bg.png','background');
-    // img.position(0,0);
-    // img.size(canvasW,canvasH);
-
-    starOne = createImg('assets/star.png','star');
-    starTwo = createImg('assets/star.png','star');
-    starThree = createImg('assets/star.png','star');
-
-    planet = createImg('assets/planet.png','planet');
-    planetRing = createImg('assets/planetRing.png','planetRing');
 
     headerBg = createImg('assets/headerBg.png','header');
     logo = createImg('assets/logo.png','logo');
@@ -200,43 +127,23 @@ function setup() {
     logo.position(imageGroup.logo.X,imageGroup.logo.Y);
     logo.size(imageGroup.logo.W,imageGroup.logo.H);
 
-    // global.position(imageGroup.global.X,imageGroup.global.Y);
-    // global.size(imageGroup.global.W,imageGroup.global.H);
+    title = createElement('h1','Movie Suggestions');
+    title.position(0,150)
+
+    subTitle = createElement('h4','Enjoying more realist science movie to inspire space exploration.');
+    subTitle.position(0,200)
+
+    takeawayInt = createDiv("In the film the depiction of the black hole is accurate, as according to Einstein it would take an infinite amount of time to cross the threshold of a black hole's event horizon, as seen by a distant observer. The person crossing the threshold, however, would notice no change in the flow of time.");
+    takeawayMar = createDiv("When watching this film keep in mind the real life research and knowledge we have gained and how it applies itself in the film. There is a lot about space we do not know today. With that, taking into account what we do know is that Mars once was similar to Earth. Mars once had water (still has briny water flowing). Which in theory could allow those who inhabit the opportunity to farm and begin food production. ");
+    takeawayInt.position(140, 530);
+    takeawayMar.position(660, 530);
+
+    linkInt = createA('https://www.bing.com/search?q=watch+the+martian+2015&filters=dtbk:%22MCFvdmVydmlldyF3YXRjaCE2MjIzMjZiZC01Zjk5LTk3ZGEtYTlkZi0wZWQ0NDNhOTI4M2I%3d%22&FORM=DEPNAV','Watch Interstellar');
+    linkInt.position(140,700);
+    linkMar = createA('https://www.bing.com/search?q=watchinterstellar&qs=n&form=QBRE&sp=-1&ghc=2&pq=watchinterstella&sc=6-16&sk=&cvid=18CC9B2ADD884EBB8918915183DD088E','Watch Martian');
+    linkMar.position(660,700);
 
 
-    // title
-    // h1 = createElement('h1','SpacEd');
-    // h1.position(imageGroup.h1.X,imageGroup.h1.Y);
-
-    // h5 = createElement('h5','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis nisl est.');
-    // h5.position(imageGroup.h5.X,imageGroup.h5.Y);
-
-    // blink = 0;
-    // pH = 60;
-    // pW = 60;
-    // pX = random(0,400);
-    // pY = random(0,400);
-
-    createCanvas(1280,768);
-    r = random(255); 
-    g = random(255); 
-    h = random(255);
-  
-    m = random(TWO_PI);
-    b = random(TWO_PI);
-    c = random(TWO_PI);
-  
-  
-    m, v, e, ma, j, s, u, n;
-  
-    m = random(TWO_PI);
-    v = random(TWO_PI);
-    e = random(TWO_PI);
-    ma = random(TWO_PI);
-    j = random(TWO_PI);
-    s = random(TWO_PI);
-    u = random(TWO_PI);
-    n = random(TWO_PI);
 }
 
 function draw() {
@@ -246,51 +153,19 @@ function draw() {
     // blinking star
     frameRate(fr);
 
-    button = createButton("Back");
+    button = createButton("Home");
     button.position(60,90);
     button.mousePressed(openMainLink)
 
-    // star One
-    starOne.position(100,300);
-    starOne.size(10,10);
-    if (blink % 5 == 0) {
-        starOne.position(98,298);
-        starOne.size(15,15);
-    }
+    image(interstellarImg,140, 260, 480, 270);
+    image(martianImg, 660, 260, 480, 270);
 
-    // star Two
-    starTwo.position(700,200);
-    starTwo.size(8,8);
-    // if (blink % 3 == 0) {
-    //     starTwo.position(698,198);
-    //     starTwo.size(10,10);
-    // }
-
-    // star Two
-    starThree.position(900,400);
-    starThree.size(12,12);
-    // if (blink % 4 == 0) {
-    //     starThree.position(898,398);
-    //     starThree.size(15,15);
-    // }
-    // blink += 10;
-
-    // planetRing.position(pX,pY);
-    // if (pH > 0 && pW > 0) {
-    //     planetRing.size(pH,pW);
-    //     pH -=0.5;
-    //     pW -=0.5;
-    // } else {
-    //     pH = 60;
-    //     pW = 60;
-    //     pX = random(1000);
-    //     pY = random(1000);
-    // }
+    // fill(0);
+    // rect(150, 580, 450, 150, 10);
+    // rect(650, 580, 450, 150, 10);
 
 
-    planetRing.position(100,200);
-    planetRing.size(50,50);
-    planet.position(1000,400);
+
 
 
 // think about hide outside canvas
@@ -306,105 +181,8 @@ function draw() {
     mouseStar.position(x+20,y);
     mouseStar.size(20,20);
 
-    // rotate(angle);
-    // global.position(imageGroup.global.X,imageGroup.global.Y);
-    // global.size(imageGroup.global.W,imageGroup.global.H);
-    // angle++;
-    // pop();
 
 
-
-    // draw solar
-
-
-    noFill(); //rings
-    strokeWeight(0.5);
-    
-    // orbit circles
-    stroke("white");
-    circle(sX, sY, d);
-    circle(sX, sY, d * pdata.v.dis);
-    circle(sX, sY, d * pdata.e.dis);
-    circle(sX, sY, d * pdata.ma.dis);
-    circle(sX, sY, d * pdata.j.dis);
-    circle(sX, sY, d * pdata.s.dis);
-    circle(sX, sY, d * pdata.u.dis);
-    circle(sX, sY, d * pdata.n.dis);
-    
-    // center planet -sun
-    noStroke();
-    fill(255,246,51);
-    circle(sX, sY, 8);
-  
-    translate(sX, sY);
-    
-    push();
-
-    push();
-  rotate(m);
-  fill(255, 135, 51); //moons
-  circle(0, d/2, radi);
-  pop();
-  
-  // v
-  push();
-  rotate(v);
-  fill(217, 255, 51); 
-  circle((d * pdata.v.dis) / 2, 0, radi*pdata.v.radi);  
-  pop();
-  
-  //rotate(a); //make the third moon rotate faster
-  
-  // e
-  push();
-  rotate(e);
-  fill(51, 255, 212);
-  circle(0,(d * pdata.e.dis) / 2, radi*pdata.e.radi);
-  pop();
-  
-  // ma
-  push();
-  rotate(ma);
-  fill(255, 51, 51);
-  circle(0,(d * pdata.ma.dis) / 2, radi*pdata.ma.radi);
-  pop();
-
-  // j
-  push();
-  rotate(j);
-  fill(255, 157, 116);
-  circle(0,(d * pdata.j.dis) / 2, radi*pdata.j.radi);
-  pop();
-
-  // s
-  push();
-  rotate(s);
-  fill(166, 202, 193);
-  circle(0,(d * pdata.s.dis) / 2, radi*pdata.s.radi);
-  pop();
-// u
-push();
-rotate(u);
-fill(132, 121, 255);
-circle(0,(d * pdata.u.dis) / 2, radi*pdata.u.radi);
-pop();
-
-// n
-push();
-rotate(n);
-fill(93, 195, 255);
-circle(0,(d * pdata.n.dis) / 2, radi*pdata.n.radi);
-pop();
-
- // updates the state of the solar system
- m = m + pdata.m.spd * 0.003;
- v = v + pdata.v.spd* 0.003;
- e = e + pdata.e.spd* 0.003;
- ma = ma + pdata.ma.spd* 0.003;
- j = j + pdata.j.spd* 0.003;
- s = s + pdata.s.spd* 0.003;
- u = u + pdata.u.spd* 0.003;
- n = n + pdata.n.spd* 0.003;
  
 
 
