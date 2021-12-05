@@ -19,7 +19,7 @@ h3 {
     font-size: 32px;
     text-align: center;
     color: white;
-    width: 18%;
+    width: 400px;
     height: 40%;
     padding: 20px;
     line-height: 1.6;
@@ -30,8 +30,8 @@ h3 {
 h4 {
     text-align: left;
     color: white;
-    width: 18%;
-    height: 40%;
+    width: 400px;
+    height: 480px;
     padding: 20px;
     line-height: 1.6;
     font-family: 'Raleway', Courier, monospace;
@@ -71,7 +71,7 @@ button {
 
 div {
     background:black;
-    width: 420px;
+    width: 400px;
     height: 480px;
     text-align: center;
     color: white;

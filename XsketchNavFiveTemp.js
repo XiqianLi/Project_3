@@ -547,23 +547,23 @@ function openLinkNavSix() {
 function popUp(x) {
   fill(0);
   popDiv = createElement('div');
-  popDiv.position(800,200);
+  popDiv.position(750,200);
 
   pNImg = createImg(x.img,'Image');
 
   if (x == popUpGroup.s) {
     pNImg.size(300,180);
-    pNImg.position(860,240);
+    pNImg.position(840,240);
   } else {
-    pNImg.position(930,240);
+    pNImg.position(890,240);
     pNImg.size(180,180);
   }
 
   let popDiv2 = createElement('h3',x.nam);
-  popDiv2.position(800,380);
+  popDiv2.position(750,380);
   
   let popDiv3 = createElement('h4',x.des);
-  popDiv3.position(800,450);
+  popDiv3.position(750,450);
 
 
   image(pNImg, 500, -150,100,100);
