@@ -180,6 +180,8 @@ function setup() {
 
     funFactEle = createDiv(funFact[rand]);
     closeB = createButton('CLOSE');
+    funFactEle.hide();
+    closeB.hide()
 
     
 

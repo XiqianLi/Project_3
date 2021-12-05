@@ -193,9 +193,9 @@ function draw() {
         APOD.size(new_width,new_width / APODratio);
         APOD.center();
     } else {
-        // new_height = vSlider.value();
-        // APOD.size(new_height / APODratio,new_height);
-        // APOD.center();
+        new_height = vSlider.value();
+        APOD.size(new_height / APODratio,new_height);
+        APOD.center();
     }
 
 
