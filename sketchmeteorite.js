@@ -1,6 +1,7 @@
 var canvas;
 var myMap;
 var data;
+var mydata;
 var meteorites;
 var w = window.innerWidth;
 var h = window.innerHeight;
@@ -21,6 +22,13 @@ var options = {
 var mappa = new Mappa('Mapboxgl', key);
 
 function preload() {
+  
+
+  data = loadJSON("https://data.nasa.gov/resource/gh4g-9sfh.json",gotData);
+  function gotData(data) {
+      mydata = data;
+  }
+  
   data = loadTable('Meteorite_Landings.csv', 'csv', 'header');
 }
 
@@ -50,6 +58,8 @@ function setup() {
   // mapDiv.addClass('myClass');
   // mapDiv.position(200,200);
 
+
+
 }
 
 function draw(){
@@ -57,9 +67,29 @@ function draw(){
   meteorites.destroyTheEarth();
   meteorites.showLanded();
 
-  if(random() > 0.7){
-    meteorites.addMeteorite(data.getString(currentMeteorite, 'reclat'), data.getString(currentMeteorite, 'reclong'), data.getString(currentMeteorite, 'mass (g)'));
-    currentMeteorite++;
+  // if(random() > 0.5){
+  //   meteorites.addMeteorite(data.getString(currentMeteorite, 'reclat'), data.getString(currentMeteorite, 'reclong'), data.getString(currentMeteorite, 'mass (g)'));
+  //   currentMeteorite++;
+  // }
+
+
+
+
+    if(random() > 0 && currentMeteorite < mydata.length){
+
+      if (mydata[currentMeteorite].geolocation) {
+        var my_lat = float(mydata[currentMeteorite].geolocation.latitude);
+        var my_lon = float(mydata[currentMeteorite].geolocation.longitude);
+        var my_mass = int(mydata[currentMeteorite].mass) * 0.1;
+
+      }
+      
+      if (typeof(my_mass) == "number") {
+        meteorites.addMeteorite(my_lat, my_lon, my_mass);
+      }
+
+      currentMeteorite++;
+   
   }
 
 
@@ -84,6 +114,8 @@ Meteorite.prototype.run = function() {
 
 Meteorite.prototype.update = function(){
   this.pixelPos = myMap.latLngToPixel(this.lat, this.lng);
+
+
   this.destination.x = this.pixelPos.x;
   this.destination.y = this.pixelPos.y;
   this.position = this.origin.lerp(this.destination, this.delta); 
@@ -109,10 +141,10 @@ Meteorite.prototype.showTrail = function(){
 Meteorite.prototype.landed = function(){
   if (this.delta > 1) {
     // Explossion
-    for(var e = 11; e > 1; e--){
-      fill(lerpColor(orange, white, e/11));
-      ellipse(this.position.x, this.position.y, this.size + e/2 , this.size + e/2);
-    }
+    // for(var e = 11; e > 1; e--){
+    //   fill(lerpColor(orange, white, e/11));
+    //   ellipse(this.position.x, this.position.y, this.size + e/2 , this.size + e/2);
+    // }
     return true;
   } else {
     return false;

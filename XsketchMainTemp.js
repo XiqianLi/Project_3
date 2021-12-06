@@ -31,6 +31,8 @@ var funFactActive = false;
 
 var rand = 1;
 
+var trigger;
+
 
 // var funFact = {
 //     funFact1: "Space is completely silent. There is no atmosphere in space, which means that sound has no medium or way to travel to be heard.",
@@ -168,7 +170,7 @@ function setup() {
     h1 = createElement('h1','SpacED');
     h1.position(imageGroup.h1.X,imageGroup.h1.Y);
 
-    h5 = createElement('h4','Welcome to SpacEd, an immersive site focused on educating its users on  all things space. Built to bring comfort and knowledge around space exploration, SpacEd is a great place to become familiar with space with data visualizations, photos, fun facts, an interactive solar system and much more.');
+    h5 = createElement('h3','Welcome to SpacEd, an immersive site focused on educating its users on  all things space. Built to bring comfort and knowledge around space exploration, SpacEd is a great place to become familiar with space with data visualizations, photos, fun facts, an interactive solar system and much more.');
     h5.position(imageGroup.h5.X,imageGroup.h5.Y);
 
     blink = 0;
@@ -182,17 +184,20 @@ function setup() {
     closeB = createButton('CLOSE');
     funFactEle.position(410,600);
     closeB.position(420,610);
-    funFactEle.hide();
+    // funFactEle.hide();
     closeB.hide()
 
-    
 
     closeB.mouseClicked(closeFunFact);
+
+    trigger = createElement("h4","Hi! I am Albert II, a rhesus monkey, was the first primate and first mammal in space. Click me for more space fun facts!");
+    trigger.position(620,590);
 
 }
 
 function draw() {
     if (funFactActive) {
+        trigger.hide();
         funFactEle.html(funFact[rand])
         funFactEle.show();
         closeB.show();
@@ -202,6 +207,7 @@ function draw() {
     else {
         funFactEle.hide();
         closeB.hide();
+        trigger.show();
     }
 
 

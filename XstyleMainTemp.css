@@ -20,12 +20,27 @@ h1 {
     font-family: 'Raleway', Helvetica, sans-serif;
 }
 
+
+h3 {
+    text-align: left;
+    line-height: 1.6;
+    font-size: 1.2em;
+    color: white;
+    width: 800px;
+    font-family: 'Raleway', Helvetica, sans-serif;
+}
+
 h4 {
     text-align: left;
     line-height: 1.6;
     color: white;
-    width: 800px;
+    width: 320px;
     font-family: 'Raleway', Helvetica, sans-serif;
+    font-weight: normal;
+    background-color: #5E8DEC;
+    padding: 20px;
+    border-radius: 20px;
+    height: 80px;
 }
 
 p {
