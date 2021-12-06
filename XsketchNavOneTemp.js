@@ -162,9 +162,13 @@ function setup() {
 
     APODratio = APOD.width / APOD.height;
   
-    if ( APODratio >=1 ) {
+    if ( APODratio >1 ) {
         APOD.size(500, AUTO);
         hSlider = createSlider(500, 1100);
+        hSlider.position(1000, 560);
+    } else if (APODratio =1) {
+        APOD.size(360, AUTO);
+        hSlider = createSlider(360, 700);
         hSlider.position(1000, 560);
     } else {
         APOD.size(AUTO, 270);

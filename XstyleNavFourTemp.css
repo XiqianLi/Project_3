@@ -17,6 +17,14 @@ h1 {
     font-size: 1.5em;
 }
 
+h4 {
+    font-family: 'Raleway', Helvetica, sans-serif;
+    text-align: center;
+    color: white;
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
 h5 {
     font-family: 'Raleway', Helvetica, sans-serif;
     text-align: center;

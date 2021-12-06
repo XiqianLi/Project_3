@@ -249,6 +249,9 @@ function draw() {
 
     pageTitle.position(240,550);
 
+    var subTitle =createElement('h4',"This map shows locations of 1000 meteorites. The dataset is from NASA's Open Data Portal and the Meteoritical Society.");
+    subTitle.position(280,585);
+
     yearFilter = yearSlider.value();
 
     for (let i=0; i<6; i++) {
@@ -305,6 +308,9 @@ function draw() {
         }
 
     stroke(255,204,0)
+    fill(255,255,255);
+    circle(-100,-130,20);
+
     fill(255,204,0);
     circle(-100,-180,20);
 
@@ -352,6 +358,9 @@ function draw() {
     sideScale = createElement('h5','< 10')
     sideScale.position(1200,550)
 
+    sideScale = createElement('h5','no data')
+    sideScale.position(1200,600)
+
 }
 
 
@@ -388,7 +397,11 @@ function dateSubmit() {
   }
 
 function massFilter(x) {
-    if (x < 10) {
+    if (isNaN(x)) {
+        r = 255;
+        g = 255;
+        b = 255;
+    } else if (x < 10) {
         r = 255;
         g = 204;
         b = 0;
@@ -412,5 +425,5 @@ function massFilter(x) {
         r = 240;
         g = 5;
         b = 5;
-    }
+    } 
 }
