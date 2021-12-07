@@ -138,28 +138,11 @@ function setup() {
 
 
 
-    pageTitle = createElement('h1','There were 45,700 Meteorite Landings on the Earth Before June 27, 2018');
+    pageTitle = createElement('h1','This is a map of 1000 recorded meteorites that have fallen on earth.');
 
-    // meteorite change to center
-
-
-
-    // push();
-    // translate(200,200);
-
-    // img = createImg('assets/bg.png','background');
-
-
-    // starOne = createImg('assets/star.png','star');
-    // starTwo = createImg('assets/star.png','star');
-    // starThree = createImg('assets/star.png','star');
-
-    // planet = createImg('assets/planet.png','planet');
-    // planetRing = createImg('assets/planetRing.png','planetRing');
 
     headerBg = createImg('assets/headerBg.png','header');
     logo = createImg('assets/logo.png','logo');
-    // global = createImg('assets/global.png','global');
     mouseStar = createImg('assets/mouseStar.png','mouseStar');
 
     //create buttons
@@ -192,17 +175,6 @@ function setup() {
 
     logo.position(imageGroup.logo.X,imageGroup.logo.Y);
     logo.size(imageGroup.logo.W,imageGroup.logo.H);
-
-    // global.position(imageGroup.global.X,imageGroup.global.Y);
-    // global.size(imageGroup.global.W,imageGroup.global.H);
-
-
-    // title
-    // h1 = createElement('h1','SpacEd');
-    // h1.position(imageGroup.h1.X,imageGroup.h1.Y);
-
-    // h5 = createElement('h5','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce quis nisl est.');
-    // h5.position(imageGroup.h5.X,imageGroup.h5.Y);
 
 }
 
@@ -247,10 +219,12 @@ function draw() {
 
 
 
-    pageTitle.position(240,550);
+    pageTitle.position(240,545);
 
-    var subTitle =createElement('h4',"This map shows locations of 1000 meteorites. The dataset is from NASA's Open Data Portal and the Meteoritical Society.");
-    subTitle.position(280,585);
+    var subTitle =createElement('h4',"Acoording to the NASA's Open Data, there were 45,700 Meteorite Landings on the Earth Before June 27, 2018.");
+    subTitle.position(280,580);
+    var subTitle =createElement('h4',"Meteorites are easy to be noticed in densely populated areas compared with less populated areas and oceans.");
+    subTitle.position(280,600);
 
     yearFilter = yearSlider.value();
 

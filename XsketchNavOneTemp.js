@@ -29,6 +29,7 @@ var dataD;
 var hSlider;
 var vSlider;
 var APODratio;
+var logo;
 
 var canvasW = 1280;
 var canvasH = 786
@@ -121,6 +122,7 @@ function setup() {
 
     headerBg = createImg('assets/headerBg.png','header');
     logo = createImg('assets/logo.png','logo');
+    logo.mousePressed(openMainLink);
     mouseStar = createImg('assets/mouseStar.png','mouseStar');
 
    navOne = createButton('APOD');
@@ -189,7 +191,8 @@ function draw() {
 
     button = createButton("Home");
     button.position(60,90);
-    button.mousePressed(openMainLink)
+    button.mousePressed(openMainLink);
+    logo.mousePressed(openMainLink)
 
 
     if (APODratio >= 1) {

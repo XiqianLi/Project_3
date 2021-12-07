@@ -124,7 +124,7 @@ Meteorite.prototype.update = function(){
 
 Meteorite.prototype.display = function() {
   strokeWeight(2);
-  fill(orange);
+  fill(white);
   ellipse(this.position.x, this.position.y, this.size, this.size);
 };
 

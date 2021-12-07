@@ -21,10 +21,16 @@ var mouseStar;
 var mouseStarX = 1;
 var mouseStarY = 1;
 
+var key = "LiLbT8JdAtz4aX1r9ezrCnCo2o0DBNHb47LAEhvS"
+var dataCURL;
+var dataSURL;
+var dataOURL;
+
+
+var current_year, current_month, current_day;
+
 // mars data
-var dataCURL = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=LiLbT8JdAtz4aX1r9ezrCnCo2o0DBNHb47LAEhvS";
-var dataSURL = "https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?sol=1000&api_key=LiLbT8JdAtz4aX1r9ezrCnCo2o0DBNHb47LAEhvS";
-var dataOURL = "https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos?sol=1000&api_key=LiLbT8JdAtz4aX1r9ezrCnCo2o0DBNHb47LAEhvS";
+
 var dataC, dataS, dataO; 
 var imageCList = [];
 var imageSList = [];
@@ -43,7 +49,7 @@ var imageSize = 220;
 var imageXSpacing = 320;
 var imageYSpacing = 230;
 var title
-var subtitleC = "Landing on Mars is no easy feat. For my landing, I had the help of temperature & pressure sensors that collected data about entry & landing conditions. Engineer Alex Scammell can tell you more about this important piece that helped me land safely.";
+var subtitleC = "NASA's Curiosity rover landed on Mars in August 2012, continues to roam Gale Crater in search of evidence that the Red Planet was once habitable. The Curiosity rover is famous for taking selfies along its journey.";
 var ape;
 var funFactEle, closeB, rand, closeFunFact,showFunFact,funFactActive;
 var funFact = [
@@ -117,12 +123,27 @@ var imageGroup = {
 
 function preload() {
     bg = loadImage('assets/bg.png');
+
+    
     
 }
 
 
-
 function setup() {
+
+    current_year = year();
+    current_month = month();
+    current_day = day();
+
+dataCURL = `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=${current_year}-${current_month}-${current_day - 1}&api_key=LiLbT8JdAtz4aX1r9ezrCnCo2o0DBNHb47LAEhvS`;
+dataSURL = "https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?sol=1000&api_key=LiLbT8JdAtz4aX1r9ezrCnCo2o0DBNHb47LAEhvS";
+
+// https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?earth_date=2010-2-30&api_key=LiLbT8JdAtz4aX1r9ezrCnCo2o0DBNHb47LAEhvS
+
+dataOURL = "https://api.nasa.gov/mars-photos/api/v1/rovers/opportunity/photos?sol=1000&api_key=LiLbT8JdAtz4aX1r9ezrCnCo2o0DBNHb47LAEhvS";
+
+
+
     createCanvas(1280,768);
     background(bg);
     fill(0);
@@ -203,9 +224,6 @@ function setup() {
     title = createElement('h1','Mars Rover Photos');
     title.position(0,150)
 
-    let subtitle = createElement('h4',subtitleC);
-    subtitle.position(140,510);
-
     ape = createImg('assets/ape.png','ape');
     ape.position(1000,620);
     ape.size(100,100);
@@ -229,52 +247,14 @@ function gotData() {
     for (var i = 0; i<3 ; i++) {
         imageSList[i] = dataS.photos[i].img_src
     }
-    // console.log(imageCList)
     console.log(imageSList)
 
     for (var i = 0; i<3 ; i++) {
         imageOList[i] = dataO.photos[i].img_src
     }
-    // console.log(imageCList)
-    // createP(dataC.explanation);
 }
 
 function draw() {
-    
-    if (funFactActive) {
-        funFactEle.html(funFact[rand])
-        funFactEle.show();
-        closeB.show();
-        funFactEle.position(480,610);
-        closeB.position(490,620);
-    } 
-    else {
-        funFactEle.hide();
-        closeB.hide();
-    }
-
-
-
-
-    // let fr = 30;
-    // // blinking star
-    // frameRate(fr);
-
-    // // star One
-    // starOne.position(100,300);
-    // starOne.size(10,10);
-
-    // // star Two
-    // starTwo.position(700,200);
-    // starTwo.size(8,8);
-
-    // starThree.position(900,400);
-    // starThree.size(12,12);
-
-
-    // planetRing.position(100,200);
-    // planetRing.size(50,50);
-    // planet.position(800,400);
 
 
 // think about hide outside canvas
@@ -290,6 +270,9 @@ function draw() {
     mouseStar.position(mouseStarX+20,mouseStarY);
     mouseStar.size(20,20);
 
+    let subtitle = createElement('h4',subtitleC);
+    subtitle.position(140,510);
+
     if (statusC) {
         image1 = createImg(imageCList[0],"image");
         image2 = createImg(imageCList[1],"image");
@@ -300,6 +283,8 @@ function draw() {
         cButton.style('background-color', col);
         sButton.style('background-color', col1);
         oButton.style('background-color', col1);
+        subtitle.html("NASA's Curiosity rover landed on Mars in August 2012, continues to roam Gale Crater in search of evidence that the Red Planet was once habitable. The Curiosity rover is famous for taking selfies along its journey.");
+
     }
 
     if (statusS) {
@@ -312,6 +297,7 @@ function draw() {
         sButton.style('background-color', col);
         cButton.style('background-color', col1);
         oButton.style('background-color', col1);
+        subtitle.html("Spirit arrived at the Red Planet in January 2004, tasked with figuring out if life could ever have existed on Mars, learning about the Red Planet's current and past climate, and characterizing Martian geology.");
 
     }
 
@@ -325,6 +311,7 @@ function draw() {
         oButton.style('background-color', col);
         sButton.style('background-color', col1);
         cButton.style('background-color', col1);
+        subtitle.html("Opportunity was the second of the two rovers launched in 2003 to land on Mars and begin traversing the Red Planet in search of signs of ancient water. The rover explored the Martian terrain for almost 15 years.");
     }
 
     image1.size(imageSize,imageSize);
@@ -345,12 +332,17 @@ function draw() {
     button.position(60,90);
     button.mousePressed(openMainLink)
 
-    // if (activeC) {
-    //     h2 = createElement('h2',subtitle);
-    //     h2.position(0,100);
-    // }
-
-
+    if (funFactActive) {
+        funFactEle.html(funFact[rand])
+        funFactEle.show();
+        closeB.show();
+        funFactEle.position(480,610);
+        closeB.position(490,620);
+    } 
+    else {
+        funFactEle.hide();
+        closeB.hide();
+    }
         
 
 }

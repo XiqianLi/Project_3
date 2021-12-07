@@ -228,20 +228,6 @@ function draw() {
     mouseStar.position(x+20,y);
     mouseStar.size(20,20);
 
-    // rotate(angle);
-    // global.position(imageGroup.global.X,imageGroup.global.Y);
-    // global.size(imageGroup.global.W,imageGroup.global.H);
-    // angle++;
-    // pop();
-
-        // funFactEle = createDiv(random(funFact));
-        // funFactEle.position(600,620);
-        // closeB = createButton('CLOSE')
-        // closeB.position(600,620);
-    
-
-
-
 }
 
 function openLinkNavOne() {

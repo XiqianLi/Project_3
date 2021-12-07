@@ -32,7 +32,8 @@ h4 {
     width: 880px;
     font-weight: normal;
     line-height: 1.6;
-    padding: 20px 60px 20px 60px;
+    padding: 20px 60px 0px 60px;
+    background: black;
 }
 
 h5 {
